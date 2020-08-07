@@ -17,11 +17,12 @@ class Suppliers extends Migration
             $table->increments('supplier_id');
             $table->string('supplier_company_name');
             $table->string('name_of_contact_person');
-            $table->integer('supplier_contact_number');
+            $table->string('supplier_contact_number');
             $table->string('supplier_email');
-            $table->string('supplier_address');
+            $table->text('supplier_address');
             $table->integer('number_of_employees_hired')->default(0);
             $table->date('hired_date');
+            $table->date('estimated_end_date');
             $table->string('additional_remarks');
             $table->timestamps();
         });

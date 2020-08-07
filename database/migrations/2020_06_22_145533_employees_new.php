@@ -25,8 +25,6 @@ class EmployeesNew extends Migration
             $table->boolean('employee_availability');
             $table->integer('project_id')->unsigned();
             $table->timestamps();
-
-            $table->primary(['employee_id']);
         });
     }
 

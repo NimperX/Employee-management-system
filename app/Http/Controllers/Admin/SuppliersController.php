@@ -50,7 +50,8 @@ class SuppliersController extends Controller
         $supplier->supplier_email = $request->supplier_email;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->number_of_employees_hired = $request->number_of_employees_hired;
-        $supplier->hire_date = $request->hire_date;
+        $supplier->hired_date = $request->hired_date;
+        $supplier->estimated_end_date = $request->estimated_end_date;
         $supplier->additional_remarks = $request->additional_remarks;
 
         $supplier->save();
@@ -87,16 +88,16 @@ class SuppliersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, $id)
     {
-        $supplier->supplier_id  = $request->supplier_id;
+        $supplier = Supplier::find($id);
         $supplier->supplier_company_name = $request->supplier_company_name;
         $supplier->name_of_contact_person = $request->name_of_contact_person;
         $supplier->supplier_contact_number = $request->supplier_contact_number;
         $supplier->supplier_email = $request->supplier_email;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->hired_date = $request->hired_date;
-        $supplier->estimated_work_end_date = $request->estimated_work_end_date;
+        $supplier->estimated_end_date = $request->estimated_end_date;
         $supplier->additional_remarks = $request->additional_remarks;
 
         $supplier->save();

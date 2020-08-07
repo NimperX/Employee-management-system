@@ -50,8 +50,8 @@
                                                         <td>{{$s->supplier_email}}</td>
                                                         <td>{{$s->supplier_address}}</td>
                                                         <td>{{$s->hired_date}}</td>
-                                                        <td>{{$s->estimated_work_end_date}}</td>
-                                                        <td><{{$s->additional_remarks}}</td>
+                                                        <td>{{$s->estimated_end_date}}</td>
+                                                        <td>{{$s->additional_remarks}}</td>
                                                         <td> <a href="{{route('admin.suppliers.edit', $s->supplier_id)}}" class="btn btn-info"> Edit </a>  
                                                     @endforeach
 </table>

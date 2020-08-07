@@ -29,8 +29,6 @@ class Labor extends Migration
 
             $table->integer('project_id')->unsigned();
             $table->timestamps();
-
-            $table->primary(['labor_id']);
         });
     }
 

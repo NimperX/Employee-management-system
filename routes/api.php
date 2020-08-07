@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/data', 'GanttController@get');
-Route::resource('task', 'TaskController');
-Route::resource('link', 'LinkController');
+Route::get('/data', 'Admin\GanttController@get');
+Route::resource('task', 'Admin\TaskController');
+Route::resource('link', 'Admin\LinkController');
 
 

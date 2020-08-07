@@ -18,10 +18,11 @@ class Customers extends Migration
             $table->string('company_name');
             $table->string('name_of_contact_person');
             $table->string('nic_of_contact_person');
-            $table->integer('contact_number');
+            $table->string('contact_number');
             $table->string('designation');
             $table->string('company_address');
             $table->string('email');
+            $table->timestamps();
         });
 
     }

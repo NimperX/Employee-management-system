@@ -56,16 +56,9 @@ class CustomersController extends Controller
         $customer->designation = $request->designation;
         $customer->company_address = $request->company_address;
         $customer->email = $request->email;
-        $customer->project_id = $request->project_id;
-        $customer->project_name = $request->project_name;
-        $customer->project_location = $request->project_location;
-        $customer->project_start_date = $request->project_start_date;
-        $customer->estimated_project_end_date = $request->estimated_project_end_date;
-        $customer->warranty_id = $request->warranty_id;
-        $customer->warranty_details = $request->warranty_details;
        
         $customer->save();
-        return redirect()->route('admin.labor.index');
+        return redirect()->route('admin.customers.index');
     }
 
     /**
@@ -87,7 +80,8 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        return view('admin.customers.edit')->with('customer', $customer);
     }
 
     /**
@@ -99,7 +93,17 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->company_name = $request->company_name;
+        $customer->name_of_contact_person = $request->name_of_contact_person;
+        $customer->nic_of_contact_person = $request->nic_of_contact_person;
+        $customer->contact_number = $request->contact_number;
+        $customer->designation = $request->designation;
+        $customer->company_address = $request->company_address;
+        $customer->email = $request->email;
+       
+        $customer->save();
+        return redirect()->route('admin.customers.index');
     }
 
     /**
