@@ -37,15 +37,20 @@
                                         <div class="form-group">
                                           <label class="control-label col-sm-2" for="projecttypetxt"> Project Type: </label>
                                           <div class="col-sm-10">
-                                            <select class="form-control" name="project_type" value="{{$project->project_type}}" required>
+                                            <select class="form-control" name="project_type" required>
                                            
                                             <option value ="" disabled selected> Choose your option </option> 
-                                            <option value="Marine"> Marine </option>
-                                      <option value="Mechanical"> Mechanical </option>
-                                      <option value="Civil"> Civil </option>
-                                      <option value="Electrical"> Electrical </option>         
+                                            @foreach($project_types as $t)
+                                            <option value="{{$t->project_type_name}}" 
+
+                                            @if($t->project_type_name == $project->project_type)
+                                            selected
+                                            @endif
+                                            > {{$t->project_type_name}} </option> 
+                                                
+                                               
+                                               @endforeach
                                                </select>
-                                            
                                           </div>
                                         </div>
 
@@ -60,7 +65,7 @@
                                         <div class="form-group">
                                         <label class="control-label col-sm-2" for="projectnamelbl">Project location:</label>
                                           <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="project_location" required>
+                                          <input type="text" class="form-control" name="project_location" value="{{$project->project_location}}"  required>
                                          
                                           </div>
                                         </div>
@@ -68,7 +73,19 @@
                                         <div class="form-group">
                                           <label class="control-label col-sm-2" for="customernamelbl"> Customer name: </label>
                                           <div class="col-sm-10">
-                                          <input type="text" class="form-control" name="customer_name" value="{{$project->customer_name}}" required>
+                                          <select class="form-control" name="customer_name" required>
+                                          <option value ="" disabled selected> Choose your option </option> 
+                                            @foreach($customers as $c)
+                                            <option value="{{$c->company_name}}"
+
+                                            @if($c->company_name == $project->customer_name)
+                                            selected
+                                            @endif
+                                            > {{$c->company_name}} </option> 
+                                                
+                                               
+                                               @endforeach
+                                               </select>
                                           </div>
                                         </div>
 
@@ -94,28 +111,11 @@
                                           </div>
 
                                           <div class="form-group">
-                                            <label class="control-label col-sm-2" for="statuslbl">Status:</label>
-                                            <label class="radio-inline">
-                                              <input type="radio" name="status" value="In progress" value="{{$project->status}}">In progress </label>
-                                              &nbsp &nbsp &nbsp &nbsp 
-                                            <label class="radio-inline">
-                                              <input type="radio" name="status" value="Completed" value="{{$project->status}}">Completed </label>
+                                              <label class="control-label col-sm-2" for="startdatelbl">Estimated end date:</label>
+                                              <div class="col-sm-10">
+                                                <input type="text" placeholder="Estimated end date" onfocus="(this.type='date')" onblur="(this.type='text')" value="{{$project->estimated_project_end_date}}" name="estimated_project_end_date" required>  
                                           </div>
-
-                            
-                                          <div class="form-group">
-                                            <label class="control-label col-sm-2" for="seniorenglbl">Senior Engineer:</label>
-                                              <div class="col-sm-10">
-                                              <input type="text" class="form-control" name="senior_engineer_name" value="{{$project->senior_engineer_name}}">
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                            <label class="control-label col-sm-2" for="projectsupervisorlbl">Project Supervisor:</label>
-                                              <div class="col-sm-10">
-                                              <input type="text" class="form-control" name="project_supervisor_name" value="{{$project->project_supervisor_name}}">
-                                              </div>
-                                            </div>
+                                          </div>
 
                                             <div class="form-group">
                                             <input type="submit" class="btn btn-info" value="Save">

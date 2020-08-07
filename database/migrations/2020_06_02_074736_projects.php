@@ -15,15 +15,12 @@ class Projects extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('project_id');
-            $table->string('project_type');
+            $table->integer('project_type_id')->unsigned();
             $table->string('project_name');
-            $table->string('customer_name');
-            $table->integer('contact_number');
-            $table->string('email');
+            $table->string('project_location');
+            $table->integer('customer_id')->unsigned();
             $table->date('project_start_date');
-            $table->boolean('status');
-            $table->string('senior_engineer_name');
-            $table->string('project_supervisor_name');
+            $table->date('estimated_project_end_date');
             $table->timestamps();
         });
 
@@ -36,6 +33,6 @@ class Projects extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('projects');
     }
 }

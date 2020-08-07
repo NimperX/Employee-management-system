@@ -22,7 +22,11 @@
       <div class="container-fluid">
           <p>
               <a href="{{route('admin.machines.create')}}" class="btn btn-primary"> Add new machine </a>
+              
 </p>
+<p>
+              <a href="{{url('/admin/machines/allocationindex')}}" class="btn btn-success"> View allocation </a>
+              </p>
            <table class="table table-bordered table-striped" id="machines_table">
                                                   <thead>
                                                     <tr>
@@ -32,10 +36,6 @@
                                                       <th scope="col">Model number</th>
                                                       <th scope="col">Machine purchase date</th>
                                                       <th scope="col">Machine availability</th>
-                                                      <th scope="col">Project id</th>
-                                                      <th scope="col">Project name</th>
-                                                      <th scope="col">Work start date</th>
-                                                      <th scope="col">Work end date</th>
                                                       <th scope="col">Additional details</th>
                                                       <th> Actions </th>
                                                     </tr>
@@ -50,12 +50,12 @@
                                                         <td>{{$m->model_number}}</td>
                                                         <td>{{$m->machine_purchase_date}}</td>
                                                         <td>{{$m->machine_availability}}</td>
-                                                        <td>{{$m->project_id}}</td>
-                                                        <td>{{$m->project_name}}</td>
-                                                        <td><{{$m->machine_start_date}}</td>
-                                                        <td>{{$m->machine_end_date}}</td>
                                                         <td>{{$m->additional_details}}</td>
-                                                        <td> <a href="{{route('admin.machines.edit', $m->machine_id)}}" class="btn btn-info"> Edit </a>  
+                                                        <td> <div class="btn-group" role="group">
+                                                        <a href="{{route('admin.machines.edit', $m->machine_id)}}" class="btn btn-info"> Edit </a> 
+                                                        <a href="{{route('admin/machines/{machine_id}/allocationEdit',$m->machine_id)}}" class="btn btn-warning" > Allocate </a>
+                                                        </div>
+                                                        </td> 
                                                     @endforeach
 </table>
 </div>

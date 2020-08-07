@@ -27,26 +27,26 @@
             <div class="card">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Online Store Visitors</h3>
-                  <a href="javascript:void(0);">View Report</a>
+                  <!--h3 class="card-title">Projects</h3>
+                  <a href="javascript:void(0);">View Report</a-->
                 </div>
               </div>
               <div class="card-body">
                 <div class="d-flex">
                   <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">820</span>
-                    <span>Visitors Over Time</span>
+                    <span class="text-bold text-lg">20</span>
+                    <span>Projects</span>
                   </p>
                   <p class="ml-auto d-flex flex-column text-right">
                     <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 12.5%
+                      <i class="fas fa-arrow-up"></i> 
                     </span>
-                    <span class="text-muted">Since last week</span>
+                    <span class="text-muted"></span>
                   </p>
-                </div>
+                </div-->
                 <!-- /.d-flex -->
 
-                <div class="position-relative mb-4">
+                <!--div class="position-relative mb-4">
                   <canvas id="visitors-chart" height="200"></canvas>
                 </div>
 
@@ -60,12 +60,17 @@
                   </span>
                 </div>
               </div>
-            </div>
+            </div-->
             <!-- /.card -->
 
             <div class="card">
               <div class="card-header border-0">
-                <h3 class="card-title">Products</h3>
+              <p class="d-flex flex-column">
+                    <span class="text-bold text-lg"></span>
+                    <span>Machines</span>
+                  </p>
+
+                <!--h3 class="card-title">Products</h3>
                 <div class="card-tools">
                   <a href="#" class="btn btn-tool btn-sm">
                     <i class="fas fa-download"></i>
@@ -166,7 +171,7 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div-->
             <!-- /.card -->
           </div>
           <!-- /.col-md-6 -->
@@ -174,7 +179,7 @@
             <div class="card">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Sales</h3>
+                  <!--h3 class="card-title">Sales</h3>
                   <a href="javascript:void(0);">View Report</a>
                 </div>
               </div>
@@ -191,9 +196,9 @@
                     <span class="text-muted">Since last month</span>
                   </p>
                 </div>
-                <!-- /.d-flex -->
+                </.d-flex -->
 
-                <div class="position-relative mb-4">
+                <!--div class="position-relative mb-4">
                   <canvas id="sales-chart" height="200"></canvas>
                 </div>
 
@@ -208,9 +213,9 @@
                 </div>
               </div>
             </div>
-            <!-- /.card -->
+            < /.card -->
 
-            <div class="card">
+            <!--div class="card">
               <div class="card-header border-0">
                 <h3 class="card-title">Online Store Overview</h3>
                 <div class="card-tools">
@@ -234,8 +239,8 @@
                     <span class="text-muted">CONVERSION RATE</span>
                   </p>
                 </div>
-                <!-- /.d-flex -->
-                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                < /.d-flex -->
+                <!--div class="d-flex justify-content-between align-items-center border-bottom mb-3">
                   <p class="text-warning text-xl">
                     <i class="ion ion-ios-cart-outline"></i>
                   </p>
@@ -246,8 +251,8 @@
                     <span class="text-muted">SALES RATE</span>
                   </p>
                 </div>
-                <!-- /.d-flex -->
-                <div class="d-flex justify-content-between align-items-center mb-0">
+                < /.d-flex -->
+                <!--div class="d-flex justify-content-between align-items-center mb-0">
                   <p class="text-danger text-xl">
                     <i class="ion ion-ios-people-outline"></i>
                   </p>

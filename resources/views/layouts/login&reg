@@ -13,4 +13,182 @@
             @endif
 
 
-         
+          $validatedData = $request->validate([
+            'project_id' => ['integer'],
+            'project_type' => ['required', 'string', 'max:255'],
+            'project_name' => ['required', 'string', 'max:255'],
+            'project_location'=> ['required', 'string', 'max:255'],
+            'customer_name' => ['required', 'string', 'max:255'],
+            'contact_number' => ['required', 'integer', 'max:10'],
+            'email' => ['required', 'string', 'max:255'],
+            'project_start_date' =>['required', 'date'],
+            'senior_engineer_name' => ['required', 'string', 'max:255'],
+            'project_supervisor_name'=> ['required', 'string', 'max:255'],
+        ]);
+        
+        
+                                            @error('contact_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+
+                                <?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class Expenses extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('expenses', function (Blueprint $table) {
+            $table->increments('expense_id');
+            $table->integer('project_id');
+            $table->string('project_type');
+            $table->string('project_name');
+            $table->date('project_start_date');
+            $table->date('estimated_project_end_date');
+            $table->string('project_location');
+            $table->string('allocated_senior_engineer_name');
+            $table->string('allocated_project_supervisor_name');
+            $table->integer('amount_given');
+            $table->date('project_start_date');
+            $table->date('estimated_project_end_date');
+            $table->integer('amount_given');
+            $table->integer('amount_given');
+            $table->string('project_type');
+            
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}
+
+ 'employee_contact_number' => ['required', 'integer', 'max:11'],
+
+  $validatedData = $request->validate([
+            'employee_nic' => ['required','string', 'unique:employees', 'max:10'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'employee_type'=> ['required', 'string', 'max:255'],
+            'employee_category' => ['required', 'string', 'max:255'],
+            'designation'=> ['string', 'max:255'],
+            'email' => ['required', 'string', 'max:255'],
+            'employee_availability' => ['required', 'string', 'max:255'],
+            'project_id'=> ['integer', 'max:255'],
+            'project_name '=> ['string', 'max:255'],
+        ]);
+
+//from employee model
+public function employeetype()
+    {
+        $this->belongsTo('App\EmployeeType', 'employee_type_id');
+    } 
+
+    public function type()
+    {
+        $this->belongsTo('App\Type', 'type_id');
+    } 
+
+    //from employee_type model
+    public function employee()
+    {
+        $this->hasMany('App\Employee', 'employee_nic');
+    }
+
+       @error('contact_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+          $validatedData = $request->validate([
+            'project_id' => ['integer', 'unique:projects'],
+            'project_type' => ['required', 'string', 'max:255'],
+            'project_name' => ['required', 'string', 'max:255'],
+            'project_location'=> ['required', 'string', 'max:255'],
+            'customer_name' => ['required', 'string', 'max:255'],
+            'contact_number' => ['required', 'integer', 'max:11'],
+            'email' => ['required', 'string', 'max:255'],
+            'project_start_date'=> ['required', 'date'],
+            'estimated_project_end_date'=> ['required', 'date'],
+            'estimated_project_end_date'=> ['required', 'date'],
+            'status' => ['required', 'string', 'max:255'],
+            'senior_engineer_name'=> ['required', 'string', 'max:255'],
+            'project_supervisor_name'=> ['required', 'string', 'max:255'],
+        ]);
+
+        //belongs to project model
+        public function warranty()
+    {
+        $this->belongsTo('App\Warranty', 'warranty_id');
+    } 
+
+     public function employee()
+    {
+        $this->hasMany('App\Employee','employee_nic');
+    }
+
+    public function machine()
+    {
+        $this->hasMany('App\Machine','machine_id');
+    }
+
+    public function project()
+    {
+        $this->belongsTo('App\Type');
+    } 
+
+     <!--div class="form-group">
+                                          
+                                            <label class="control-label col-sm-2" for="statuslbl">Availability:</label>
+
+                                            <label class="radio-inline">
+                                            @foreach($employee_availability as $a)
+                                              <input type="radio" name="employee_availability" value="{{$a->Not available}}">Not available</label>
+                                              &nbsp &nbsp &nbsp &nbsp 
+                                            <label class="radio-inline">
+                                              <input type="radio" name="employee_availability" value="{{$a->Available}}">Available</label>
+                                              @endforeach
+                                          </div>
+
+                            
+                                          <div class="form-group">
+                                            <label class="control-label col-sm-2" for="projectidlbl">Project ID:</label>
+                                              <div class="col-sm-10">
+                                              <input type="text" class="form-control" name="project_id">
+                                              </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                            <label class="control-label col-sm-2" for="projectnamelbl">Project name:</label>
+                                              <div class="col-sm-10">
+                                              <input type="text" class="form-control" name="project_name">
+                                              </div>
+                                            </div-->
+
+$projects = DB::table('projects')->get();
+              //->join('employees', 'projects.employee_nic', '=', 'employees.project_id')
+              //->join('machines', 'projects.machine_id', '=', 'machines.project_id')
+              //->select('projects.project_id', 'employees.first_name','machines.machine_id')
+              
+
+              //return view('admin.allocation.index', ['projects' => $projects]);
+
+              //return view()->with(['data'=>$data]);

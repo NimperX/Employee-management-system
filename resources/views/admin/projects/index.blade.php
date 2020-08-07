@@ -22,7 +22,9 @@
       <div class="container-fluid">
           <p>
               <a href="{{route('admin.projects.create')}}" class="btn btn-primary"> Add new project </a>
+              <a href="" class="btn btn-secondary"> Create report </a>
 </p>
+
            <table class="table table-bordered table-striped" id="projects_table">
                                                   <thead>
                                                     <tr>
@@ -34,9 +36,7 @@
                                                       <th scope="col">Contact number</th>
                                                       <th scope="col">E-mail</th>
                                                       <th scope="col">Project start date</th>
-                                                      <th scope="col">Status</th>
-                                                      <th scope="col">Name of senior engineer</th>
-                                                      <th scope="col">Name of project supervisor</th>
+                                                      <th scope="col">Estimated project end date</th>
                                                       <th> Actions </th>
                                                     </tr>
                                                   </thead>
@@ -52,11 +52,16 @@
                                                         <td>{{$p->contact_number}}</td>
                                                         <td>{{$p->email}}</td>
                                                         <td><{{$p->project_start_date}}</td>
-                                                        <td>{{$p->status}}</td>
-                                                        <td>{{$p->senior_engineer_name}}</td>
-                                                        <td>{{$p->project_supervisor_name}}</td>
-                                                        <td> <a href="{{route('admin.projects.edit', $p->project_id)}}" class="btn btn-info"> Edit </a>  
+                                                        <td><{{$p->estimated_project_end_date}}</td>
+                                                        <td> <div class="btn-group" role="group">
+                                                             <a href="{{route('admin.projects.edit', $p->project_id)}}" class="btn btn-info"> Edit </a>  
+                                                             <a href="" class="btn btn-success" > View </a>
+                                                        </div>
+                                                        </td> 
                                                     @endforeach
+
+                                                   
+                                                        
 </table>
 </div>
 </div>

@@ -42,9 +42,10 @@ to get the desired effect
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <form class="form-inline ml-3" action="{{url('/search')}}" method="POST" role="search">
+    <input type="hidden" name="_token" value="{{csrf_token()}}">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="find">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
@@ -115,8 +116,8 @@ to get the desired effect
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link
             @if($segment=='estimates')
                active
                @endif
@@ -124,8 +125,36 @@ to get the desired effect
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Estimates
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View all</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Labor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Machines</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Labor and machines</p>
+                </a>
+              </li>
+</ul>
+</li>
           <li class="nav-item">
             <a href="#" class="nav-link 
             @if($segment=='quotations')
@@ -135,10 +164,38 @@ to get the desired effect
             <ion-icon name="clipboard" size="small"></ion-icon>
               <p>
                 Quotations
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View all</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Labor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Machines</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Labor and machines</p>
+                </a>
+              </li>
+</ul>
+</li>
             <li class="nav-item">
-            <a href="#" class="nav-link
+            <a href="{{ url('/admin/timelines/gantt') }}" class="nav-link
             @if($segment=='timelines')
                active
                @endif
@@ -160,7 +217,7 @@ to get the desired effect
               </p>
             </a>
             <li class="nav-item">
-            <a href="#" class="nav-link
+            <a href="{{route('admin.labor.index')}}" class="nav-link
              @if($segment=='labor')
                active
                @endif
@@ -182,7 +239,7 @@ to get the desired effect
               </p>
             </a>
             <li class="nav-item">
-            <a href="#" class="nav-link
+            <a href="{{route('admin.suppliers.index')}}" class="nav-link
             @if($segment=='suppliers')
                active
                @endif
@@ -193,8 +250,8 @@ to get the desired effect
               </p>
             </a>
             <li class="nav-item">
-            <a href="#" class="nav-link
-            @if($segment=='warranty')
+            <a href="{{route('admin.warranties.index')}}" class="nav-link
+            @if($segment=='warranties')
                active
                @endif
                ">
@@ -204,7 +261,7 @@ to get the desired effect
               </p>
             </a>
             <li class="nav-item">
-            <a href="#" class="nav-link
+            <a href="{{route('admin.expenses.index')}}" class="nav-link
             @if($segment=='expenses')
                active
                @endif
@@ -215,7 +272,7 @@ to get the desired effect
               </p>
             </a>
             <li class="nav-item">
-            <a href="#" class="nav-link
+            <a href="{{route('admin.customers.index')}}" class="nav-link
             @if($segment=='customers')
                active
                @endif
@@ -225,30 +282,8 @@ to get the desired effect
                 Customers
               </p>
 </a>
-              <li class="nav-item">
-                <a href="pages/examples/login.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Login</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/register.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Register</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/forgot-password.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Forgot Password</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/recover-password.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Recover Password</p>
-                </a>
-              </li>
+              
+              
 
           <li class="nav-header">Controls</li>
           <li class="nav-item">

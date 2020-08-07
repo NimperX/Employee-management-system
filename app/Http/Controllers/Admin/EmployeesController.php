@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Project; //name of model
+use App\Type;
+use App\EmployeeCategory;
+
+
 
 class EmployeesController extends Controller
 {
@@ -21,6 +25,7 @@ class EmployeesController extends Controller
     {
         //displays all data in the projects table in db inside projects view
         //this is passed as an array
+
         $arr['employees'] = Employee::all();
         return view('admin.employees.index')->with($arr);
     }
@@ -32,8 +37,12 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //returns a form to add a new project
-        return view ('admin.employees.create');
+        //returns a form to add a new employee
+        $arr['project_types'] = Type::all();
+
+        $arr['employee_category'] = EmployeeCategory::all();
+
+        return view ('admin.employees.create')->with($arr);
     }
 
     /**
@@ -44,6 +53,7 @@ class EmployeesController extends Controller
      */
     public function store(Request $request, Employee $employee)
     {
+
         $employee->employee_nic = $request->employee_nic;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
@@ -53,8 +63,7 @@ class EmployeesController extends Controller
         $employee->employee_contact_number = $request->employee_contact_number;
         $employee->email = $request->email;
         $employee->employee_availability = $request->employee_availability;
-        $employee->project_id = $request->project_id;
-        $employee->project_name = $request->project_name;
+       
 
         $employee->save();
         return redirect()->route('admin.employees.index');
@@ -82,19 +91,13 @@ class EmployeesController extends Controller
     {
          //to edit data
         //the value from db is stored inside this object and passed through the url to the view
-        //$employee = Employee::find($employee);
-        //return view('admin.employees.edit',
-        //['employee'=> $employee]);
+        
+        $arr['project_types'] = Type::all();
+
+        $arr['employee_category'] = EmployeeCategory::all();
+        
         $arr['employee'] = $employee;
         return view('admin.employees.edit')->with($arr);
-
-        //return redirect()->route('admin.employees.edit', [$employee->employee_nic]);
-        //return view {{route('admin.employees.edit', [$employee->employee_nic])}};
-
-        //return redirect()->route('admin.employees.index');
-
-        //return view('admin.employees.edit')->with($arr);
-
         
         
     }
@@ -109,7 +112,7 @@ class EmployeesController extends Controller
     public function update(Request $request,Employee $employee)
     {
          //the entire entry in the db is represented
-         $employee = Employee::findOrFail($employee_nic);
+        //$employee = Employee::findOrFail($employee_nic);
         $employee->employee_nic = $request->employee_nic;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
@@ -119,13 +122,90 @@ class EmployeesController extends Controller
         $employee->employee_contact_number = $request->employee_contact_number;
         $employee->email = $request->email;
         $employee->employee_availability = $request->employee_availability;
-        $employee->project_id = $request->project_id;
-        $employee->project_name = $request->project_name;
+       
 
         $employee->save();
         return redirect()->route('admin.employees.index');
 
     }
+
+    public function allocationEdit(Employee $employee)
+    {
+         //retrieve view to allocate employee to the project
+        //the value from db is stored inside this object and passed through the url to the view
+        
+        $arr['project_types'] = Type::all();
+
+        $arr['projects'] = Project::all();
+
+        $arr['employee_category'] = EmployeeCategory::all();
+
+        $arr['employees'] = Employee::all();
+        
+        //$arr['employee'] = $employee;
+        return view('admin.employees.allocationview')->with($arr);    
+    }
+
+    public function allocationUpdate(Request $request, $employee_nic)
+    {
+         //the entire entry in the db is represented
+         $e = Employee::find($employee_nic);
+        $e->employee_nic = $request->employee_nic;
+        $e->first_name = $request->first_name;
+        $e->last_name = $request->last_name;
+        $e->employee_type = $request->employee_type;
+        $e->employee_category = $request->employee_category;
+        $e->designation = $request->designation;
+        $e->employee_contact_number = $request->employee_contact_number;
+        $e->email = $request->email;
+        $e->employee_availability = $request->employee_availability;
+        $e->project_id = $request->project_id;
+        $e->project_details = $request->project_details;
+       
+
+        $e->save();
+        return redirect()->route('admin.employees.index');
+
+    }
+
+    //public function allocationindex()
+    //{
+        //displays all data in the projects table in db inside projects view
+        //this is passed as an array
+
+       // $arr['employees'] = Employee::all();
+        //return view('admin.employees.allocationindex')->with($arr);
+    //}
+
+    /*public function employee_allocation_report(Request $request)
+    {
+
+    
+    $sortBy = $request->input('sort_by');
+
+    $title = 'Employee Allocation Report'; // Report title
+
+    $meta = [ // For displaying filters description on header
+        'Sort By' => $sortBy
+    ];
+
+    $queryBuilder = Employee::select(['first_name', 'last_name', 'project_id', 'project_details']) // Do some querying..
+                        ->orderBy($sortBy);
+
+    $columns = [ // Set Column to be displayed
+        'First Name' => 'first_name',
+        'Last Name' => 'last_name',
+        'Project ID' => 'project_id',
+        'Project details' => 'project_details',
+    ];
+
+    // Generate Report with flexibility to manipulate column class even manipulate column value (using Carbon, etc).
+    return PdfReport::of($title, $meta, $queryBuilder, $columns)
+                    ->limit(20) // Limit record to be showed
+                    ->stream(); // other available method: download('filename') to download pdf / make() that will producing DomPDF / SnappyPdf instance so you could do any other DomPDF / snappyPdf method such as stream() or download()
+}*/
+    
+
 
     /**
      * Remove the specified resource from storage.

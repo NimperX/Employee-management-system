@@ -21,8 +21,12 @@
     <div class="content">
       <div class="container-fluid">
           <p>
-              <a href="{{route('admin.employees.create')}}" class="btn btn-primary"> Add new employee </a>
+              <a href="{{route('admin.employees.create')}}" class="btn btn-primary"> Add new employee </a>             
 </p>
+<p>
+              <a href="{{url('/admin/employees/allocationindex')}}" class="btn btn-success"> View allocation </a>
+              </p>
+<div style="overflow-x:auto;">
            <table class="table table-bordered table-striped" id="employee_table">
                                                   <thead>
                                                     <tr>
@@ -35,8 +39,6 @@
                                                       <th scope="col">Employee contact number</th>
                                                       <th scope="col">Email</th>
                                                       <th scope="col">Availability</th>
-                                                      <th scope="col">Project ID</th>
-                                                      <th scope="col">Project name</th>
                                                       <th> Actions </th>
                                                     </tr>
                                                   </thead>
@@ -53,11 +55,16 @@
                                                         <td>{{$e->employee_contact_number}}</td>
                                                         <td>{{$e->email}}</td>
                                                         <td>{{$e->employee_availability}}</td>
-                                                        <td>{{$e->project_id}}</td>
-                                                        <td>{{$e->project_name}}</td>
-                                                        <td> <a href="{{route('admin.employees.edit',$e->employee_nic)}}" class="btn btn-info"> Edit </a>  
+                                                        <td> <div class="btn-group" role="group">
+                                                        <a href="{{route('admin.employees.edit',$e->employee_nic)}}" class="btn btn-info"> Edit  </a> 
+                                                        <a href="{{route('admin/employees/{employee_nic}/allocationEdit',$e->employee_nic)}}" class="btn btn-warning" > Allocate </a>
+                                                        </div>
+                                                        </td>
+                                                      
+                                                        
                                                     @endforeach
 </table>
+</div>
 </div>
 </div>
     @endsection

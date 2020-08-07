@@ -8,16 +8,23 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://dlpng.com/png/6750784" rel="stylesheet">
 
         <!-- Styles -->
         <style>
             html, body {
+               
                 background-color: #fff;
+                background-image: url("https://dlpng.com/png/6750784");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
                 color: #2471A3;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+                
             }
 
             .full-height {

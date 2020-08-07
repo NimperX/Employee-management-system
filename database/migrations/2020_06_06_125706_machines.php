@@ -15,15 +15,12 @@ class Machines extends Migration
     {
         Schema::create('machines', function (Blueprint $table) {
             $table->increments('machine_id');
-            $table->string('machine_type');
+            $table->integer('machine_type_id')->unsigned();
+            $table->integer('prpject_id')->unsigned();
             $table->string('machine_name');
             $table->string('model_number');
             $table->date('machine_purchase_date');
             $table->boolean('machine_availability');
-            $table->integer('project_id');
-            $table->string('project_name');
-            $table->date('machine_start_date');
-            $table->date('machine_end_date');
             $table->string('additional_details');
             $table->timestamps();
     });
@@ -36,6 +33,6 @@ class Machines extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('machines');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Project; //name of model
+use App\Type;
+use App\Customer;
 
 class ProjectController extends Controller
 {
@@ -34,8 +36,14 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        //returns a list of project types inside add project form
+        $arr['project_types'] = Type::all();
+
+        //returns a list of customers
+        $arr['customers'] = Customer::all();
+
         //returns a form to add a new project
-        return view ('admin\projects\create');
+        return view ('admin\projects\create')->with($arr);
 
     }
 
@@ -45,11 +53,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //ha created a object from the model 
-    public function store(Request $request, Project $project )
+    //created a object from the model 
+    public function store(Request $request, Project $project)
     {
         //fetches form data from the db on button click
         //values inside input fields are stored in the instance of project obj
+
         $project->project_id  = $request->project_id;
         $project->project_type = $request->project_type;
         $project->project_name = $request->project_name;
@@ -58,9 +67,7 @@ class ProjectController extends Controller
         $project->contact_number = $request->contact_number;
         $project->email = $request->email;
         $project->project_start_date = $request->project_start_date;
-        $project->status = $request->status;
-        $project->senior_engineer_name = $request->senior_engineer_name;
-        $project->project_supervisor_name = $request->project_supervisor_name;
+        $project->estimated_project_end_date = $request->estimated_project_end_date;
 
         $project->save();
         return redirect()->route('admin.projects.index');
@@ -75,7 +82,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        
     }
 
     /**
@@ -89,6 +96,11 @@ class ProjectController extends Controller
         //to edit data
         //the value from db is stored inside this object and passed through the url to the view
         $arr['project'] = $project;
+
+        $arr['project_types'] = Type::all();
+
+        $arr['customers'] = Customer::all();
+        
         return view('admin.projects.edit')->with($arr);
 
 
@@ -103,6 +115,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request,Project $project)
     {
+        
         //the entire entry in the db is represented
         $project->project_id  = $request->project_id;
         $project->project_type = $request->project_type;
@@ -112,15 +125,17 @@ class ProjectController extends Controller
         $project->contact_number = $request->contact_number;
         $project->email = $request->email;
         $project->project_start_date = $request->project_start_date;
-        $project->status = $request->status;
-        $project->senior_engineer_name = $request->senior_engineer_name;
-        $project->project_supervisor_name = $request->project_supervisor_name;
+        $project->estimated_project_end_date = $request->estimated_project_end_date;
 
         $project->save();
         return redirect()->route('admin.projects.index');
 
     }
 
+   
+
+    
+   
     /**
      * Remove the specified resource from storage.
      *

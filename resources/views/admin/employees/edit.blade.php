@@ -58,30 +58,37 @@
                                             <select class="form-control" name="employee_type" required value="{{$employee->employee_type}}">
                                            
                                             <option value ="" disabled selected> Choose your option </option> 
-                                            <option value="Senior Engineer"> Senior Engineer </option>
-                                      <option value="Junior Engineer"> Junior Engineer </option>
-                                      <option value="Project Supervisor"> Project Supervisor </option>
-                                      <option value="Foreman"> Foreman </option>
-                                      <option value="Helper"> Helper </option>
-                                      <option value="Multi skilled laborers"> Multi skilled laborers </option>
-                                      <option value="Other"> Other </option>         
+                                            @foreach($project_types as $t)
+                                            <option value="{{$t->project_type_name}}" 
+
+                                            @if($t->project_type_name == $employee->employee_type)
+                                            selected
+                                            @endif
+                                            > {{$t->project_type_name}} </option> 
+                                                
+                                               
+                                               @endforeach
                                                </select>
-                                            
                                           </div>
                                         </div>
-
+                                            
                                         <div class="form-group">
                                           <label class="control-label col-sm-2" for="projecttypetxt"> Employee category: </label>
                                           <div class="col-sm-10">
                                             <select class="form-control" name="employee_category" required value="{{$employee->employee_category}}">
                                            
                                             <option value ="" disabled selected> Choose your option </option> 
-                                            <option value="Marine"> Marine </option>
-                                      <option value="Mechanical"> Mechanical </option>
-                                      <option value="Civil"> Civil </option>
-                                      <option value="Electrical"> Electrical </option>         
+                                            @foreach($employee_category as $e)
+                                            <option value="{{$e->employee_category}}" 
+
+                                            @if($e->employee_category == $employee->employee_category)
+                                            selected
+                                            @endif
+                                            > {{$e->employee_category}} </option> 
+                                                
+                                               
+                                               @endforeach
                                                </select>
-                                            
                                           </div>
                                         </div>
 
@@ -111,26 +118,11 @@
                                             <label class="control-label col-sm-2" for="statuslbl">Availability:</label>
 
                                             <label class="radio-inline">
-                                              <input type="radio" name="employee_availability" value="{{$employee->employee_availability}}">Not available</label>
+                                              <input type="radio" name="employee_availability" value="{{$employee->employee_availability}}" {{ $employee->employee_availability == "Not available" ? 'checked' : '' }}>Not available</label>
                                               &nbsp &nbsp &nbsp &nbsp 
                                             <label class="radio-inline">
-                                              <input type="radio" name="employee_availability" value="{{$employee->employee_availability}}">Available</label>
+                                              <input type="radio" name="employee_availability" value="{{$employee->employee_availability}}" {{ $employee->employee_availability == "Available" ? 'checked' : '' }}>Available</label>
                                           </div>
-
-                            
-                                          <div class="form-group">
-                                            <label class="control-label col-sm-2" for="projectidlbl">Project ID:</label>
-                                              <div class="col-sm-10">
-                                              <input type="text" class="form-control" name="project_id" value="{{$employee->project_id}}">
-                                              </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                            <label class="control-label col-sm-2" for="projectnamelbl">Project name:</label>
-                                              <div class="col-sm-10">
-                                              <input type="text" class="form-control" name="project_name" value="{{$employee->project_name}}">
-                                              </div>
-                                            </div>
 
                                             <div class="form-group">
                                             <input type="submit" class="btn btn-info" value="Save">
