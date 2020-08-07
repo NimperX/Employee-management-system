@@ -27,7 +27,7 @@ class Labor extends Migration
             $table->date('labor_hired_date');
             $table->date('labor_end_date');
 
-            $table->integer('project_id')->unsigned();
+            $table->integer('project_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

@@ -11,12 +11,12 @@ class Machine extends Model
 
     public function machine()
     {
-        $this->belongsTo('App\Project', 'project_id');
+        return $this->belongsTo('App\Project', 'project_id');
     } 
 
     public function type()
     {
-        $this->belongsTo('App\MachineType', 'id');
+        return $this->belongsTo('App\MachineType', 'machine_type_id');
     } 
 
 }

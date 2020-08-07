@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Project;
+use finfo;
 
 class CustomersController extends Controller
 {
@@ -114,6 +115,9 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->delete();
+
+        return redirect()->route('admin.customers.index');
     }
 }

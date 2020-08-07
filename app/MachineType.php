@@ -11,6 +11,6 @@ class MachineType extends Model
 
     public function machine()
     {
-        $this->hasMany('App\Machine', 'machine_id');
+        $this->hasMany('App\Machine');
     }
 }

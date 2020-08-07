@@ -23,7 +23,7 @@ class EmployeesNew extends Migration
             $table->integer('employee_contact_number');
             $table->string('employee_email');
             $table->boolean('employee_availability');
-            $table->integer('project_id')->unsigned();
+            $table->integer('project_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

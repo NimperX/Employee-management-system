@@ -16,12 +16,12 @@ class Machines extends Migration
         Schema::create('machines', function (Blueprint $table) {
             $table->increments('machine_id');
             $table->integer('machine_type_id')->unsigned();
-            $table->integer('prpject_id')->unsigned();
-            $table->string('machine_name');
-            $table->string('model_number');
+            $table->integer('project_id')->unsigned()->nullable();
+            $table->string('machine_name')->nullable();
+            $table->string('model_number')->nullable();
             $table->date('machine_purchase_date');
             $table->boolean('machine_availability');
-            $table->string('additional_details');
+            $table->string('additional_details')->nullable();
             $table->timestamps();
     });
 }

@@ -50,7 +50,13 @@
                                                         <td>{{$c->designation}}</td>
                                                         <td>{{$c->company_address}}</td>
                                                         <td>{{$c->email}}</td>
-                                                        <td> <a href="{{route('admin.customers.edit',$c->customer_id)}}" class="btn btn-info"> Edit </a>  
+                                                        <td> <a href="{{route('admin.customers.edit',$c->customer_id)}}" class="btn btn-info"> Edit </a>
+                                                          <form action="{{route('admin.customers.destroy',$c->customer_id)}}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                          <button type="submit" class="btn btn-danger mt-1"> Delete </button>
+                                                          </form>
+                                                        </td>
                                                     @endforeach
 </table>
 </div>

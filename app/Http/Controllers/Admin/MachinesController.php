@@ -45,15 +45,17 @@ class MachinesController extends Controller
      */
     public function store(Request $request, Machine $machine)
     {
-        
-        $machine->machine_id  = $request->machine_id;
-        $machine->machine_type = $request->machine_type;
+        $machine = new Machine();
+        $machineType = MachineType::find($request->machine_type_id);
         $machine->machine_name = $request->machine_name;
         $machine->model_number = $request->model_number;
         $machine->machine_purchase_date = $request->machine_purchase_date;
-        $machine->machine_availability = $request->machine_availability;
+        if ($request->machine_availability == 'true')
+            $machine->machine_availability = 1;
+        else
+            $machine->machine_availability = 0;
         $machine->additional_details = $request->additional_details;
-
+        $machine->type()->associate($machineType);
         $machine->save();
         return redirect()->route('admin.machines.index');
     }
@@ -91,18 +93,21 @@ class MachinesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Machine $machine)
+    public function update(Request $request, $id)
     {
          //the entire entry in the db is represented
-         $machine->machine_id  = $request->machine_id;
-         $machine->machine_type = $request->machine_type;
-         $machine->machine_name = $request->machine_name;
-         $machine->model_number = $request->model_number;
-         $machine->machine_purchase_date = $request->machine_purchase_date;
-         $machine->machine_availability = $request->machine_availability;
-         $machine->additional_details = $request->additional_details;
- 
-         $project->save();
+        $machine = Machine::find($id);
+        $machineType = MachineType::find($request->machine_type_id);
+        $machine->machine_name = $request->machine_name;
+        $machine->model_number = $request->model_number;
+        $machine->machine_purchase_date = $request->machine_purchase_date;
+        if ($request->machine_availability == 'true')
+            $machine->machine_availability = 1;
+        else
+            $machine->machine_availability = 0;
+        $machine->additional_details = $request->additional_details;
+        $machine->type()->associate($machineType);
+        $machine->save();
          return redirect()->route('admin.machines.index');
     }
 
