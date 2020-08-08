@@ -11,11 +11,11 @@ class EmployeeCategory extends Model
 
     public function employee()
     {
-        $this->hasMany('App\Employee', 'employee_nic');
+        return $this->hasMany('App\Employee', 'employee_nic');
     }
 
     public function labor()
     {
-        $this->hasMany('App\Labor', 'labor_nic');
+        return $this->hasMany('App\Labor', 'labor_nic');
     }
 }

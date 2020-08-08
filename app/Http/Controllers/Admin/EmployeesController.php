@@ -51,19 +51,25 @@ class EmployeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Employee $employee)
-    {
+    public function store(Request $request)
+    {   
+        $employee_type = Type::find($request->employee_type);
+        $employee_cat = EmployeeCategory::find($request->employee_category);
 
+        $employee = new Employee();
         $employee->employee_nic = $request->employee_nic;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
-        $employee->employee_type = $request->employee_type;
-        $employee->employee_category = $request->employee_category;
         $employee->designation = $request->designation;
         $employee->employee_contact_number = $request->employee_contact_number;
-        $employee->email = $request->email;
-        $employee->employee_availability = $request->employee_availability;
-       
+        $employee->employee_email = $request->email;
+        if($request->employee_availability == 'true')
+            $employee->employee_availability = 1;
+        else
+            $employee->employee_availability = 0;
+
+        $employee->type()->associate($employee_type);
+        $employee->employeecategory()->associate($employee_cat);
 
         $employee->save();
         return redirect()->route('admin.employees.index');
@@ -109,24 +115,28 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Employee $employee)
+    public function update(Request $request,$id)
     {
-         //the entire entry in the db is represented
-        //$employee = Employee::findOrFail($employee_nic);
+        $employee_type = Type::find($request->employee_type);
+        $employee_cat = EmployeeCategory::find($request->employee_category);
+
+        $employee = Employee::find($id);
         $employee->employee_nic = $request->employee_nic;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
-        $employee->employee_type = $request->employee_type;
-        $employee->employee_category = $request->employee_category;
         $employee->designation = $request->designation;
         $employee->employee_contact_number = $request->employee_contact_number;
-        $employee->email = $request->email;
-        $employee->employee_availability = $request->employee_availability;
-       
+        $employee->employee_email = $request->email;
+        if($request->employee_availability == 'true')
+            $employee->employee_availability = 1;
+        else
+            $employee->employee_availability = 0;
+
+        $employee->type()->associate($employee_type);
+        $employee->employeecategory()->associate($employee_cat);
 
         $employee->save();
         return redirect()->route('admin.employees.index');
-
     }
 
     public function allocationEdit(Employee $employee)

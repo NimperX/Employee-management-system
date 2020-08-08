@@ -50,18 +50,29 @@ class LaborController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Labor $labor)
+    public function store(Request $request)
     {
-        $labor->supplier_id = $request->supplier_id;
-        $labor->supplier_details = $request->supplier_details;
+        $labor = new Labor();
+        $supplier = Supplier::find($request->supplier_id);
+        $labor_type = Type::find($request->labor_type);
+        $labor_cat = EmployeeCategory::find($request->labor_category);
+
         $labor->labor_nic = $request->labor_nic;
         $labor->first_name = $request->first_name;
         $labor->last_name = $request->last_name;
-        $labor->labor_type = $request->labor_type;
-        $labor->labor_category = $request->labor_category;
         $labor->designation = $request->designation;
         $labor->labor_contact_number = $request->labor_contact_number;
-        $labor->labor_availability = $request->labor_availability;
+        $labor->labor_email = $request->labor_email;
+        if ($request->labor_availability == 'true')
+            $labor->labor_availability = 1;
+        else
+            $labor->labor_availability = 0;
+        $labor->labor_hired_date = $request->hired_date;
+        $labor->labor_end_date = $request->end_date;
+
+        $labor->supplier()->associate($supplier);
+        $labor->type()->associate($labor_type);
+        $labor->employeecategory()->associate($labor_cat);
        
         $labor->save();
         return redirect()->route('admin.labor.index');
@@ -103,18 +114,29 @@ class LaborController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Labor $labor)
+    public function update(Request $request, $id)
     {
-        $labor->supplier_id = $request->supplier_id;
-        $labor->supplier_details = $request->supplier_details;
+        $labor = Labor::find($id);
+        $supplier = Supplier::find($request->supplier_id);
+        $labor_type = Type::find($request->labor_type);
+        $labor_cat = EmployeeCategory::find($request->labor_category);
+
         $labor->labor_nic = $request->labor_nic;
         $labor->first_name = $request->first_name;
         $labor->last_name = $request->last_name;
-        $labor->labor_type = $request->labor_type;
-        $labor->labor_category = $request->labor_category;
         $labor->designation = $request->designation;
         $labor->labor_contact_number = $request->labor_contact_number;
-        $labor->labor_availability = $request->labor_availability;
+        $labor->labor_email = $request->labor_email;
+        if ($request->labor_availability == 'true')
+            $labor->labor_availability = 1;
+        else
+            $labor->labor_availability = 0;
+        $labor->labor_hired_date = $request->hired_date;
+        $labor->labor_end_date = $request->end_date;
+
+        $labor->supplier()->associate($supplier);
+        $labor->type()->associate($labor_type);
+        $labor->employeecategory()->associate($labor_cat);
        
         $labor->save();
         return redirect()->route('admin.labor.index');

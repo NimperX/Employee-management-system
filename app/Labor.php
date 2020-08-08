@@ -15,21 +15,21 @@ class Labor extends Model
 
     public function project()
     {
-        $this->belongsTo('App\Project', 'project_id');
+        return $this->belongsTo('App\Project', 'project_id');
     } 
 
     public function type()
     {
-        $this->belongsTo('App\Type', 'id');
+        return $this->belongsTo('App\Type', 'labor_type_id','id');
     } 
     
     public function employeecategory()
     {
-        $this->belongsTo('App\EmployeeCategory', 'id');
+        return $this->belongsTo('App\EmployeeCategory', 'labor_category_id', 'id');
     } 
 
     public function supplier()
     {
-        $this->belongsTo('App\Supplier', 'supplier_id');
+        return $this->belongsTo('App\Supplier', 'supplier_id','supplier_id');
     } 
 }

@@ -15,22 +15,22 @@ class Employee extends Model
 
     public function project()
     {
-        $this->belongsTo('App\Project', 'project_id');
+        return $this->belongsTo('App\Project', 'project_id');
     } 
 
     public function employeecategory()
     {
-        $this->belongsTo('App\EmployeeCategory', 'id');
+        return $this->belongsTo('App\EmployeeCategory', 'employee_category_id', 'id');
     } 
 
     public function type()
     {
-        $this->belongsTo('App\Type', 'id');
+        return $this->belongsTo('App\Type', 'employee_type_id', 'id');
     } 
 
     public function expense()
     {
-        $this->hasMany('App\Expense', 'expense_id');
+        return $this->hasMany('App\Expense', 'expense_id');
     } 
 
     

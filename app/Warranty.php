@@ -11,12 +11,12 @@ class Warranty extends Model
 
     public function project()
     {
-        $this->belongsTo('App\Project', 'project_id');
+        return $this->belongsTo('App\Project', 'project_id');
     } 
 
     public function customer()
     {
-        $this->belongsTo('App\Customer', 'customer_id');
+        return $this->belongsTo('App\Customer', 'customer_id');
     } 
 
 }

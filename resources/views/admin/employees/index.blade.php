@@ -49,15 +49,15 @@
                                                         <td>{{$e->employee_nic}}</td>
                                                         <td>{{$e->first_name}}</td>
                                                         <td>{{$e->last_name}}</td>
-                                                        <td>{{$e->employee_type}}</td>
-                                                        <td>{{$e->employee_category}}</td>
-                                                        <td>{{$e->designation}}</td>
+                                                        <td>{{$e->type->project_type_name}}</td>
+                                                        <td>{{$e->employeecategory->employee_category}}</td>
+                                                        <td>{{$e->designation == '' ? '-' : $e->designation}}</td>
                                                         <td>{{$e->employee_contact_number}}</td>
-                                                        <td>{{$e->email}}</td>
-                                                        <td>{{$e->employee_availability}}</td>
+                                                        <td>{{$e->employee_email}}</td>
+                                                        <td>{{$e->employee_availability == 1 ? 'Available' : 'Not available'}}</td>
                                                         <td> <div class="btn-group" role="group">
-                                                        <a href="{{route('admin.employees.edit',$e->employee_nic)}}" class="btn btn-info"> Edit  </a> 
-                                                        <a href="{{route('admin/employees/{employee_nic}/allocationEdit',$e->employee_nic)}}" class="btn btn-warning" > Allocate </a>
+                                                        <a href="{{route('admin.employees.edit',$e->employee_id)}}" class="btn btn-info"> Edit  </a> 
+                                                        <a href="{{route('admin/employees/{employee_nic}/allocationEdit',$e->employee_id)}}" class="btn btn-warning" > Allocate </a>
                                                         </div>
                                                         </td>
                                                       

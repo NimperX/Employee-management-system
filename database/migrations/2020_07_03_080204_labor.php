@@ -20,7 +20,8 @@ class Labor extends Migration
             $table->string('last_name');
             $table->integer('labor_type_id')->unsigned();
             $table->integer('labor_category_id')->unsigned();
-            $table->integer('labor_contact_number');
+            $table->string('designation')->nullable();
+            $table->string('labor_contact_number',12);
             $table->string('labor_email');
             $table->boolean('labor_availability');
             $table->integer('supplier_id')->unsigned();

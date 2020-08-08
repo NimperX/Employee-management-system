@@ -17,7 +17,7 @@ class Suppliers extends Migration
             $table->increments('supplier_id');
             $table->string('supplier_company_name');
             $table->string('name_of_contact_person');
-            $table->string('supplier_contact_number');
+            $table->string('supplier_contact_number', 12);
             $table->string('supplier_email');
             $table->text('supplier_address');
             $table->integer('number_of_employees_hired')->default(0);

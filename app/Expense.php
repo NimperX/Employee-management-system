@@ -16,12 +16,12 @@ class Expense extends Model
 
     public function project()
     {
-        $this->belongsTo('App\Project', 'project_id');
+        return $this->belongsTo('App\Project', 'project_id');
     }
 
     public function employee()
     {
-        $this->belongsTo('App\Employee', 'employee_nic');
+        return $this->belongsTo('App\Employee', 'employee_nic');
     }
 
 

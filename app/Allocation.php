@@ -21,21 +21,21 @@ class Allocation extends Model
 
     public function project()
     {
-        $this->hasMany('App\Project');
+        return $this->hasMany('App\Project');
     }
     public function employee()
     {
-        $this->hasMany('App\Employee');
+        return $this->hasMany('App\Employee');
     }
 
     public function type()
     {
-        $this->belongsTo('App\Type', 'id');
+        return $this->belongsTo('App\Type', 'id');
     } 
     
     public function employeecategory()
     {
-        $this->belongsTo('App\EmployeeCategory', 'id');
+        return $this->belongsTo('App\EmployeeCategory', 'id');
     } 
 
 }

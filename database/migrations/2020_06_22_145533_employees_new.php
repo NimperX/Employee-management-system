@@ -20,7 +20,8 @@ class EmployeesNew extends Migration
             $table->string('last_name');
             $table->integer('employee_type_id')->unsigned();
             $table->integer('employee_category_id')->unsigned();
-            $table->integer('employee_contact_number');
+            $table->string('designation')->nullable();
+            $table->string('employee_contact_number',12);
             $table->string('employee_email');
             $table->boolean('employee_availability');
             $table->integer('project_id')->unsigned()->nullable();
