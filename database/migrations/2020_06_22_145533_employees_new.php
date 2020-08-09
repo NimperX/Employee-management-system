@@ -14,6 +14,7 @@ class EmployeesNew extends Migration
     public function up()
     {
         Schema::create('employees_new', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('employee_id');
             $table->string('employee_nic')->unique();
             $table->string('first_name');

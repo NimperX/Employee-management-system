@@ -14,6 +14,7 @@ class EmployeeCategories extends Migration
     public function up()
     {
         Schema::create('employee_categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('employee_category');
         });

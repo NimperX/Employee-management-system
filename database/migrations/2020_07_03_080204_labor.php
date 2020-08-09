@@ -14,6 +14,7 @@ class Labor extends Migration
     public function up()
     {
         Schema::create('labor', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('labor_id');
             $table->string('labor_nic')->unique();
             $table->string('first_name');

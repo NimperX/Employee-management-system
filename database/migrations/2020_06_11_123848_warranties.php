@@ -14,6 +14,7 @@ class Warranties extends Migration
     public function up()
     {
         Schema::create('warranties', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('warranty_id');
             $table->integer('project_id')->unsigned();
             $table->integer('customer_id')->unsigned();

@@ -14,6 +14,7 @@ class Machines extends Migration
     public function up()
     {
         Schema::create('machines', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('machine_id');
             $table->integer('machine_type_id')->unsigned();
             $table->integer('project_id')->unsigned()->nullable();

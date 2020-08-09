@@ -14,6 +14,7 @@ class Suppliers extends Migration
     public function up()
     {
         Schema::create('suppliers', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('supplier_id');
             $table->string('supplier_company_name');
             $table->string('name_of_contact_person');

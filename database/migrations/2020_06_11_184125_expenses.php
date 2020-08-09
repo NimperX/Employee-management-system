@@ -14,6 +14,7 @@ class Expenses extends Migration
     public function up()
     {
         Schema::create('expenses', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('expense_id');
             $table->integer('project_id')->unsigned();
             $table->decimal('amount_given');

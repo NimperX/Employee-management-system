@@ -14,6 +14,7 @@ class Projects extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('project_id');
             $table->integer('project_type_id')->unsigned();
             $table->string('project_name');

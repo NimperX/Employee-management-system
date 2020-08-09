@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MachineTypes extends Migration
+class CreateEstimationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class MachineTypes extends Migration
      */
     public function up()
     {
-        Schema::create('machine_types', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->string('machine_type_name');
-            
+        Schema::create('estimation', function (Blueprint $table) {
+            $table->id();
+            $table->
+            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class MachineTypes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('machine_types');
+        Schema::dropIfExists('estimation');
     }
 }
