@@ -15,7 +15,7 @@ class CreateEstimationTable extends Migration
     {
         Schema::create('estimation', function (Blueprint $table) {
             $table->id();
-            $table->
+            $table->string('estimate');
             $table->timestamps();
         });
     }
