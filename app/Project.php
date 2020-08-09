@@ -36,7 +36,7 @@ class Project extends Model
 
     public function warranty()
     {
-        return $this->has('App\Warranty', 'warranty_id');
+        return $this->hasOne('App\Warranty', 'warranty_id');
     }
 
     public function expense()

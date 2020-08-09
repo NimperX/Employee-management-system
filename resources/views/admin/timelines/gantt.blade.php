@@ -44,10 +44,10 @@
     gantt.config.order_branch = true;
     gantt.config.order_branch_free = true;
     gantt.init("gantt_here");
-    gantt.load("https://docs.dhtmlx.com/server/data");
+    gantt.load("/api/data");
 
-  var dp = new gantt.dataProcessor("/api");
-dp.init(gantt);
-dp.setTransactionMode("REST");
+    var dp = new gantt.dataProcessor("/api");
+    dp.init(gantt);
+    dp.setTransactionMode("REST");
 </script>
 </body>

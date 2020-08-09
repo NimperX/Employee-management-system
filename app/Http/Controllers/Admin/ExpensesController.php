@@ -48,17 +48,18 @@ class ExpensesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Expense $expense)
+    public function store(Request $request)
     {
-        $expense->expense_id  = $request->expense_id;
-        $expense->project_name = $request->project_name;
-        $expense->money_given_start_date = $request->money_given_start_date;
-        $expense->money_given_end_date = $request->money_given_end_date;
+        $expense = new Expense();
+        $project = Project::find($request->project_id);
+        $employee = Employee::find($request->receiver_id);
+        
+        $expense->money_given_start_date = $request->time_period_start_date;
+        $expense->money_given_end_date = $request->time_period_end_date;
         $expense->amount_given = $request->amount_given;
-        $expense->receiver_name = $request->receiver_name;
         
-      
-        
+        $expense->project()->associate($project);
+        $expense->employee()->associate($employee);
 
         $expense->save();
         return redirect()->route('admin.expenses.index');
@@ -100,17 +101,19 @@ class ExpensesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(Request $request, $id)
     {
-        //$expense = Expense::findOrFail($expense_id);
-        $expense->expense_id  = $request->expense_id;
-        $expense->project_name = $request->project_name;
-        $expense->money_given_start_date = $request->money_given_start_date;
-        $expense->money_given_end_date = $request->money_given_end_date;
+        $expense = Expense::find($id);
+        $project = Project::find($request->project_id);
+        $employee = Employee::find($request->receiver_id);
+        
+        $expense->money_given_start_date = $request->time_period_start_date;
+        $expense->money_given_end_date = $request->time_period_end_date;
         $expense->amount_given = $request->amount_given;
         $expense->amount_spent = $request->amount_spent;
-        $expense->amount_leftover = $request->amount_leftover;
-        $expense->receiver_name = $request->receiver_name;
+        
+        $expense->project()->associate($project);
+        $expense->employee()->associate($employee);
 
         $expense->save();
         return redirect()->route('admin.expenses.index');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Warranty;
 use App\Project;
 use App\Customer;
+use Session;
 
 class WarrantiesController extends Controller
 {
@@ -34,10 +35,6 @@ class WarrantiesController extends Controller
     public function create()
     {
         $arr['projects'] = Project::all();
-
-        $arr['warranties'] = Warranty::all();
-
-        $arr['customers'] = Customer::all();
         return view('admin.warranties.create')->with($arr);
     }
 
@@ -47,16 +44,23 @@ class WarrantiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Warranty $warranty)
+    public function store(Request $request)
     {
-        $warranty->warranty_id  = $request->warranty_id;
-        $warranty->project_id = $request->project_id;
-        $warranty->project_name = $request->project_name;
-        $warranty->customer_name = $request->customer_name;
+        $warranty = new Warranty();
+        $project = Project::find($request->project_id);
+        $customer = Customer::find($project->customer_id);
+
+        $warranty->description = $request->description;
+        if(($request->warranty_start_date || $request->warranty_end_date) && $request->machine_hours){
+            Session::flash('err','You have selected both period and machine hours. Select only one of them.');
+            return redirect()->back();
+        }
         $warranty->warranty_start_date = $request->warranty_start_date;
         $warranty->warranty_end_date = $request->warranty_end_date;
         $warranty->machine_hours = $request->machine_hours;
         
+        $warranty->project()->associate($project);
+        $warranty->customer()->associate($customer);
 
         $warranty->save();
         return redirect()->route('admin.warranties.index');
@@ -79,14 +83,12 @@ class WarrantiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Warranty $warranty)
+    public function edit($id)
     {
-        $arr['warranty'] = $warranty;
+        $arr['warranty'] = Warranty::find($id);
 
         $arr['projects'] = Project::all();
 
-        $arr['customers'] = Customer::all();
-        
         return view('admin.warranties.edit')->with($arr);
 
     }
@@ -98,16 +100,23 @@ class WarrantiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Warranty $warranty)
+    public function update(Request $request, $id)
     {
-        $warranty->warranty_id  = $request->warranty_id;
-        $warranty->project_id = $request->project_id;
-        $warranty->project_name = $request->project_name;
-        $warranty->customer_name = $request->customer_name;
+        $warranty = Warranty::find($id);
+        $project = Project::find($request->project_id);
+        $customer = Customer::find($project->customer_id);
+
+        $warranty->description = $request->description;
+        if(($request->warranty_start_date || $request->warranty_end_date) && $request->machine_hours){
+            Session::flash('err','You have selected both period and machine hours. Select only one of them.');
+            return redirect()->back();
+        }
         $warranty->warranty_start_date = $request->warranty_start_date;
         $warranty->warranty_end_date = $request->warranty_end_date;
         $warranty->machine_hours = $request->machine_hours;
         
+        $warranty->project()->associate($project);
+        $warranty->customer()->associate($customer);
 
         $warranty->save();
         return redirect()->route('admin.warranties.index');

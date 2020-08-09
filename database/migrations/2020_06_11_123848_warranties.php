@@ -18,9 +18,10 @@ class Warranties extends Migration
             $table->integer('project_id')->unsigned();
             $table->integer('customer_id')->unsigned();
             $table->text('description')->nullable();
-            $table->date('warranty_start_date');
-            $table->date('warranty_end_date');
-            $table->integer('machine_hours');
+            $table->date('warranty_start_date')->nullable();
+            $table->date('warranty_end_date')->nullable();
+            $table->integer('machine_hours')->nullable();
+            $table->timestamps();
         });
     }
 

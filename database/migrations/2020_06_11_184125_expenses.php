@@ -19,8 +19,7 @@ class Expenses extends Migration
             $table->decimal('amount_given');
             $table->date('money_given_start_date');
             $table->date('money_given_end_date');
-            $table->decimal('amount_spent');
-            $table->decimal('amount_leftover');
+            $table->decimal('amount_spent')->nullable()->default(0);
             $table->integer('given_employee_id')->unsigned();
         });
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Warranty extends Model
 {
-    protected $table = 'warranties_new';
+    protected $table = 'warranties';
     protected $primaryKey = 'warranty_id';
 
     public function project()
