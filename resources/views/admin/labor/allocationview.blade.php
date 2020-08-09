@@ -3,214 +3,109 @@
 
 
 <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Labor Allocation Details</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{url('/admin')}}">Dashboard</a></li>
-              <li class="breadcrumb-item active">Labor Allocation Details</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-     <!-- /.content-header -->
-     <div class="content">
-      <div class="container-fluid">
-      
-      @foreach($labor as $l)
-      <form class="form-horizontal" action="{{route('admin/labor/{labor_nic}/allocationUpdate', $l->labor_nic)}}" method="POST">
-      @endforeach
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Labor Allocation Details</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{url('/admin')}}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Labor Allocation Details</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<div class="content">
+  <div class="container-fluid">
+
+    <form class="form-horizontal" action="{{route('admin/labor/{labor_nic}/allocationUpdate', $labor->labor_id)}}" method="POST">
+      <!--input type="hidden" name="_method" value="PUT"-->
       <input type="hidden" name="_token" value="{{csrf_token()}}">
       @method('PUT')
-      
-                                            
-                                          <div class="form-group">
-                                          <label class="control-label col-sm-2" for="projecttypetxt"> Supplier ID: </label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                          <select class="form-control" name="supplier_id" required value="{{$l->supplier_id}}">
-                                          <option value ="" disabled selected> Choose your option </option> 
-                                            @foreach($suppliers as $s)
-                                            <option value="{{$s->supplier_id}}"
-                                            @if($s->supplier_id == $l->supplier_id)
-                                            selected
-                                            @endif
-                                            > {{$s->supplier_id}} </option>             
-                                               
-                                               @endforeach
-                                               @endforeach
-                                               </select>
-                                            
-                                          </div>
-                                        </div>
-                                           
-                                        <div class="form-group">
-                                          <label class="control-label col-sm-2" for="projecttypetxt"> Supplier details: </label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                          <select class="form-control" name="supplier_details" required value="{{$l->supplier_id}} {{$l->supplier_company_name}}">
-                                          <option value ="" disabled selected> Choose your option </option> 
-                                            @foreach($suppliers as $s)
-                                            <option value="{{$s->supplier_id}} {{$s->supplier_company_name}}"
-                                            @if($s->supplier_id == $l->supplier_details)
-                                            selected
-                                            @endif
-                                            > {{$s->supplier_id}} {{$s->supplier_company_name}} </option> 
-                                                
-                                               @endforeach
-                                               @endforeach
-                                               </select>
-                                            
-                                          </div>
-                                        </div>
+      <table>
+        @if($labor->labor_id)
+        <tr><td>Labor ID</td><td>: {{$labor->labor_id}}</td></tr>
+        @endif
 
-                                           <div class="form-group">
-                                          <label class="control-label col-sm-2" for="empniclbl">NIC number of laborer:</label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                            <input type="text" class="form-control" name="labor_nic" value="{{$l->labor_nic}}">
-                                           @endforeach
-                                          
-                                          </div>
-                                        </div>
+        @if($labor->first_name || $labor->last_name)
+        <tr><td>Labor Name</td><td>: {{$labor->first_name.' '.$labor->last_name}}</td></tr>
+        @endif
 
-                                        <div class="form-group">
-                                          <label class="control-label col-sm-2" for="fnamelbl">First name:</label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                            <input type="text" class="form-control" name="first_name" value="{{$l->first_name}}" required>
-                                            @endforeach
-                                           
-                                          </div>
-                                        </div>
+        @if($labor->labor_nic)
+        <tr><td>Labor NIC</td><td>: {{$labor->labor_nic}}</td></tr>
+        @endif
 
-                                        <div class="form-group">
-                                          <label class="control-label col-sm-2" for="lnamelbl">Last name:</label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                            <input type="text" class="form-control" name="last_name" value="{{$l->last_name}}" required>
-                                           @endforeach
-                                          </div>
-                                        </div>
+        @if($labor->labor_type_id)
+        <tr><td>Labor type</td><td>: {{$labor->type->project_type_name}}</td></tr>
+        @endif
 
-                                        <div class="form-group">
-                                          <label class="control-label col-sm-2" for="projecttypetxt"> Laborer type: </label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                          <select class="form-control" name="labor_type" required value="{{$l->labor_type}}">
-                                          <option value ="" disabled selected> Choose your option </option> 
-                                            @foreach($project_types as $t)
-                                            <option value="{{$t->project_type_name}}"
-                                            @if($t->project_type_name == $l->labor_type)
-                                            selected
-                                            @endif
-                                            > {{$t->project_type_name}} </option> 
-                                                
-                                               @endforeach
-                                               @endforeach
-                                               </select>
-                                            
-                                          </div>
-                                        </div>
+        @if($labor->labor_category_id)
+        <tr><td>Labor category</td><td>: {{$labor->employeecategory->employee_category}}</td></tr>
+        @endif
 
-                                        <div class="form-group">
-                                          <label class="control-label col-sm-2" for="projecttypetxt"> Laborer category: </label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                            <select class="form-control" name="labor_category" required value="{{$l->labor_category}}">
-                                           
-                                            <option value ="" disabled selected> Choose your option </option> 
-                                            @foreach($employee_category as $e)
-                                            <option value="{{$e->employee_category}}"
-                                            @if($e->employee_category == $l->labor_category)
-                                            selected
-                                            @endif
-                                            > {{$e->employee_category}} </option> 
-                                                
-                                               @endforeach
-                                               @endforeach
-                                               </select>
-                                          </div>
-                                        </div>
+        @if($labor->designation)
+        <tr><td>Labor designation</td><td>: {{$labor->designation}}</td></tr>
+        @endif
 
-                                        <div class="form-group">
-                                        <label class="control-label col-sm-10" for="projectnamelbl">Designation(if laborer type is other):</label>
-                                          <div class="col-sm-10">
-                                          @foreach($labor as $l)
-                                          <input type="text" class="form-control" name="designation" value="{{$l->designation}}">
-                                          @endforeach
-                                         
-                                          </div>
-                                        </div>
+        @if($labor->labor_contact_number)
+        <tr><td>Labor contact number</td><td>: {{$labor->labor_contact_number}}</td></tr>
+        @endif
 
-                                        <div class="form-group">
-                                          <label class="control-label col-sm-10" for="customercontactlbl">Contact number(enter as 94..):</label>
-                                            <div class="col-sm-10">
-                                            @foreach($labor as $l)
-                                            <input type="text" class="form-control" name="labor_contact_number" required value="{{$l->labor_contact_number}}">
-                                            @endforeach
+        @if($labor->labor_email)
+        <tr><td>Labor email</td><td>: {{$labor->labor_email}}</td></tr>
+        @endif
 
-                                            </div>
-                                          </div>
-                                            
+        @if($labor->labor_hired_date)
+        <tr><td>Labor hired date</td><td>: {{$labor->labor_hired_date}}</td></tr>
+        @endif
+        
+        @if($labor->labor_end_date)
+        <tr><td>Labor hire end date</td><td>: {{$labor->labor_end_date}}</td></tr>
+        @endif
+      </table>
 
-                                          <div class="form-group">
-                                          
-                                            <label class="control-label col-sm-2" for="statuslbl">Availability:</label>
-                                            @foreach($labor as $l)
-                                            <label class="radio-inline">
-                                              <input type="radio" name="labor_availability" value="{{$l->labor_availability}}" {{ $l->labor_availability == "Not available" ? 'checked' : '' }}>Not available</label>
-                                              &nbsp &nbsp &nbsp &nbsp 
-                                            <label class="radio-inline">
-                                              <input type="radio" name="labor_availability" value="{{$l->labor_availability}}" {{ $l->labor_availability == "Available" ? 'checked' : '' }}>Available</label>
-                                              @endforeach
-                                          </div>
+      @if($labor->supplier_id)
+      <h5 class="mt-4">Suppplier details</h5>
+      <table>
+        @if($labor->supplier->supplier_company_name)
+        <tr><td>Supplier Company</td><td>: {{$labor->supplier->supplier_company_name}}</td></tr>
+        @endif
 
-                                          <div class="form-group">
-                                            <label class="control-label col-sm-2" for="projectidlbl">Project ID:</label>
-                                            <div class="col-sm-10">
-                                            @foreach($labor as $l)
-                                            <select class="form-control" name="project_id">
-                                           
-                                           <option value ="" disabled selected> Choose your option </option> 
-                                           @foreach($projects as $p)
-                                           <option value="{{$p->project_id}}"> {{$p->project_id}} </option> 
-                                               
-                                              @endforeach
-                                              @endforeach
-                                              </select>
-                                         </div>
-                                       </div>
+        @if($labor->supplier->name_of_contact_person)
+        <tr><td>Contact person</td><td>: {{$labor->supplier->name_of_contact_person}}</td></tr>
+        @endif
 
-                                            <div class="form-group">
-                                            <label class="control-label col-sm-2" for="projectnamelbl">Project details:</label>
-                                              <div class="col-sm-10">
-                                              @foreach($labor as $l)
-                                              <select class="form-control" name="project_details">
-                                           
-                                            <option value ="" disabled selected> Choose your option </option> 
-                                            @foreach($projects as $p)
-                                            <option value="{{$p->project_id}} {{$p->project_name}} {{$p->project_type}} {{$p->project_location}}"> {{$p->project_id}} - {{$p->project_name}} , {{$p->project_type}} , {{$p->project_location}} </option> 
-                                                
-                                               @endforeach
-                                               @endforeach
-                                               </select>
-                                          </div>
-                                        </div>
-                            
-                                         
+        @if($labor->supplier->supplier_contact_number)
+        <tr><td>Contact number</td><td>: {{$labor->supplier->supplier_contact_number}}</td></tr>
+        @endif
 
-                                            <div class="form-group">
-                                            <input type="submit" class="btn btn-info" value="Save">
-                                            <input class="btn btn-secondary float-right" type="reset" value="Reset">
-                                            </div>
+        @if($labor->supplier->supplier_email)
+        <tr><td>Email address</td><td>: {{$labor->supplier->supplier_email}}</td></tr>
+        @endif
+      </table>
+      @endif
 
-               
-                                      
+      <div class="form-group mt-4 mb-4">
+        <label class="control-label col-sm-2" for="projecttypetxt"> Select project to allocate: </label>
+        <div class="col-sm-10">
+          <select class="form-control" name="project_id" required {{$labor->project_id ? 'value="'.$labor->project_id.'"' : ''}}>
+
+            <option value="" disabled selected> Choose your option </option>
+            @foreach($projects as $p)
+              <option value="{{$p->project_id}}" {{$labor->project_id == $p->project_id ? 'selected' : ''}}> {{$p->project_name}} </option>
+            @endforeach
+          </select>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-info" value="Allocate">
+        <input class="btn btn-secondary float-right" type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
 </div>
-</div>
-    @endsection
+@endsection

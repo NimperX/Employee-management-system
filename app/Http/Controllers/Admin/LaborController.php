@@ -142,45 +142,47 @@ class LaborController extends Controller
         return redirect()->route('admin.labor.index');
     }
 
-    public function allocationEdit(Labor $labor)
+    public function allocationEdit($id)
     {
          //to edit data
         //the value from db is stored inside this object and passed through the url to the view
-        
-        $arr['project_types'] = Type::all();
-
         $arr['projects'] = Project::all();
-
-        $arr['employee_category'] = EmployeeCategory::all();
-
-        $arr['suppliers'] = Supplier::all();
-
-        $arr['labor'] = Labor::all();
+        $arr['labor'] = Labor::find($id);
         
         return view('admin.labor.allocationview')->with($arr);    
     }
 
-    public function allocationUpdate(Request $request, $labor_nic)
+    public function allocationUpdate(Request $request, $id)
     {
          //the entire entry in the db is represented
-         $l = Labor::find($labor_nic);
-        $l->supplier_id = $request->supplier_id;
-        $l->supplier_details = $request->supplier_details;
-        $l->labor_nic = $request->labor_nic;
-        $l->first_name = $request->first_name;
-        $l->last_name = $request->last_name;
-        $l->labor_type = $request->labor_type;
-        $l->labor_category = $request->labor_category;
-        $l->designation = $request->designation;
-        $l->labor_contact_number = $request->labor_contact_number;
-        $l->labor_availability = $request->labor_availability;
-        $l->project_id = $request->project_id;
-        $l->project_details = $request->project_details;
-       
+        $labor = Labor::find($id);
+        $project = Project::find($request->project_id);
+        
+        $labor->labor_availability = 0;
+        $labor->project()->associate($project);
 
-        $l->save();
-        return redirect()->route('admin.labor.index');
+        $labor->save();
+        return redirect()->route('admin.labor.allocationindex');
 
+    }
+
+    public function unallocate(Request $request, $id)
+    {
+         //the entire entry in the db is represented
+        $labor = Labor::find($id);
+        
+        $labor->labor_availability = 1;
+        $labor->project()->dissociate();
+
+        $labor->save();
+        return redirect()->route('admin.labor.allocationindex');
+
+    }
+
+    public function allocationindex()
+    {
+        $arr['labor'] = Labor::has('project')->get();
+        return view('admin.labor.allocationindex')->with($arr);
     }
 
 

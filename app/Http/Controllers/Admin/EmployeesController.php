@@ -139,53 +139,51 @@ class EmployeesController extends Controller
         return redirect()->route('admin.employees.index');
     }
 
-    public function allocationEdit(Employee $employee)
+    public function allocationEdit($id)
     {
          //retrieve view to allocate employee to the project
         //the value from db is stored inside this object and passed through the url to the view
-        
-        $arr['project_types'] = Type::all();
-
         $arr['projects'] = Project::all();
-
-        $arr['employee_category'] = EmployeeCategory::all();
-
-        $arr['employees'] = Employee::all();
-        
+        $arr['employee'] = Employee::find($id);
         //$arr['employee'] = $employee;
         return view('admin.employees.allocationview')->with($arr);    
     }
 
-    public function allocationUpdate(Request $request, $employee_nic)
+    public function allocationUpdate(Request $request, $id)
     {
          //the entire entry in the db is represented
-         $e = Employee::find($employee_nic);
-        $e->employee_nic = $request->employee_nic;
-        $e->first_name = $request->first_name;
-        $e->last_name = $request->last_name;
-        $e->employee_type = $request->employee_type;
-        $e->employee_category = $request->employee_category;
-        $e->designation = $request->designation;
-        $e->employee_contact_number = $request->employee_contact_number;
-        $e->email = $request->email;
-        $e->employee_availability = $request->employee_availability;
-        $e->project_id = $request->project_id;
-        $e->project_details = $request->project_details;
-       
+        $e = Employee::find($id);
+        $project = Project::find($request->project_id);
 
+        $e->employee_availability = 0;
+        $e->project()->associate($project);
+        
         $e->save();
-        return redirect()->route('admin.employees.index');
+        return redirect()->route('admin.employees.allocationindex');
 
     }
 
-    //public function allocationindex()
-    //{
-        //displays all data in the projects table in db inside projects view
-        //this is passed as an array
+    public function unallocate(Request $request, $id)
+    {
+         //the entire entry in the db is represented
+        $employee = Employee::find($id);
+        
+        $employee->employee_availability = 1;
+        $employee->project()->dissociate();
 
-       // $arr['employees'] = Employee::all();
-        //return view('admin.employees.allocationindex')->with($arr);
-    //}
+        $employee->save();
+        return redirect()->route('admin.employees.allocationindex');
+
+    }
+
+    public function allocationindex()
+    {
+        // displays all data in the projects table in db inside projects view
+        // this is passed as an array
+
+       $arr['employees'] = Employee::has('project')->get();
+        return view('admin.employees.allocationindex')->with($arr);
+    }
 
     /*public function employee_allocation_report(Request $request)
     {

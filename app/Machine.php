@@ -9,7 +9,7 @@ class Machine extends Model
     protected $table = 'machines';
     protected $primaryKey = 'machine_id';
 
-    public function machine()
+    public function project()
     {
         return $this->belongsTo('App\Project', 'project_id');
     } 

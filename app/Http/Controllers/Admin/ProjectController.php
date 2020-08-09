@@ -54,20 +54,21 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     //created a object from the model 
-    public function store(Request $request, Project $project)
+    public function store(Request $request)
     {
         //fetches form data from the db on button click
         //values inside input fields are stored in the instance of project obj
+        $project = new Project();
+        $project_type = Type::find($request->project_type);
+        $customer = Customer::find($request->customer_id);
 
-        $project->project_id  = $request->project_id;
-        $project->project_type = $request->project_type;
         $project->project_name = $request->project_name;
         $project->project_location = $request->project_location;
-        $project->customer_name = $request->customer_name;
-        $project->contact_number = $request->contact_number;
-        $project->email = $request->email;
         $project->project_start_date = $request->project_start_date;
         $project->estimated_project_end_date = $request->estimated_project_end_date;
+
+        $project->type()->associate($project_type);
+        $project->customer()->associate($customer);
 
         $project->save();
         return redirect()->route('admin.projects.index');
@@ -113,19 +114,21 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Project $project)
+    public function update(Request $request,$id)
     {
         
         //the entire entry in the db is represented
-        $project->project_id  = $request->project_id;
-        $project->project_type = $request->project_type;
+        $project = Project::find($id);
+        $project_type = Type::find($request->project_type);
+        $customer = Customer::find($request->customer_id);
+
         $project->project_name = $request->project_name;
         $project->project_location = $request->project_location;
-        $project->customer_name = $request->customer_name;
-        $project->contact_number = $request->contact_number;
-        $project->email = $request->email;
         $project->project_start_date = $request->project_start_date;
         $project->estimated_project_end_date = $request->estimated_project_end_date;
+
+        $project->type()->associate($project_type);
+        $project->customer()->associate($customer);
 
         $project->save();
         return redirect()->route('admin.projects.index');

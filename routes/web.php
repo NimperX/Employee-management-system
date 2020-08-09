@@ -45,20 +45,17 @@ Route::resource('/admin/projects', 'Admin\ProjectController' , ['as'=>'admin']);
 //route for employees;each route should have a prefix named admin
 Route::get('/admin/employees/{employee_nic}/allocationEdit', 'Admin\EmployeesController@allocationEdit' , ['as'=>'admin'])->name('admin/employees/{employee_nic}/allocationEdit');
 Route::put('/admin/employees/{employee_nic}/allocationUpdate', 'Admin\EmployeesController@allocationUpdate' , ['as'=>'admin'])->name('admin/employees/{employee_nic}/allocationUpdate');
-Route::get('/admin/employees/allocationindex', function () {
-    $employee = DB::table('employees_new')->get();
-    return view('/admin/employees/allocationindex', ['employee'=> $employee]);
-});
+Route::put('/admin/employees/{employee_nic}/unallocate', 'Admin\EmployeesController@unallocate' , ['as'=>'admin'])->name('admin/employees/{employee_nic}/unallocate');
+Route::get('/admin/employees/allocationindex', 'Admin\EmployeesController@allocationindex' , ['as'=>'admin'])->name('admin.employees.allocationindex');
+
 
 Route::resource('/admin/employees', 'Admin\EmployeesController', ['as'=>'admin']);
 
 //route for machines;each route should have a prefix named admin
 Route::get('/admin/machines/{machine_id}/allocationEdit', 'Admin\MachinesController@allocationEdit' , ['as'=>'admin'])->name('admin/machines/{machine_id}/allocationEdit');
 Route::put('/admin/machines/{machine_id}/allocationUpdate', 'Admin\MachinesController@allocationUpdate' , ['as'=>'admin'])->name('admin/machines/{machine_id}/allocationUpdate');
-Route::get('/admin/machines/allocationindex', function () {
-    $machine = DB::table('machines')->get();
-    return view('/admin/machines/allocationindex', ['machine'=> $machine]);
-});
+Route::put('/admin/machines/{machine_id}/unallocate', 'Admin\MachinesController@unallocate' , ['as'=>'admin'])->name('admin/machines/{machine_id}/unallocate');
+Route::get('/admin/machines/allocationindex', 'Admin\MachinesController@allocationindex' , ['as'=>'admin'])->name('admin.machines.allocationindex');
 Route::resource('/admin/machines', 'Admin\MachinesController', ['as'=>'admin']);
 
 //route for suppliers;each route should have a prefix named admin
@@ -82,10 +79,8 @@ Route::resource('/admin/customers', 'Admin\CustomersController', ['as'=>'admin']
 //route for labor
 Route::get('/admin/labor/{labor_nic}/allocationEdit', 'Admin\LaborController@allocationEdit' , ['as'=>'admin'])->name('admin/labor/{labor_nic}/allocationEdit');
 Route::put('/admin/labor/{labor_nic}/allocationUpdate', 'Admin\LaborController@allocationUpdate' , ['as'=>'admin'])->name('admin/labor/{labor_nic}/allocationUpdate');
-Route::get('/admin/labor/allocationindex', function () {
-    $labor = DB::table('labor')->get();
-    return view('/admin/labor/allocationindex', ['labor'=> $labor]);
-});
+Route::put('/admin/labor/{labor_nic}/unallocate', 'Admin\LaborController@unallocate' , ['as'=>'admin'])->name('admin/labor/{labor_nic}/unallocate');
+Route::get('/admin/labor/allocationindex', 'Admin\LaborController@allocationindex' , ['as'=>'admin'])->name('admin.labor.allocationindex');
 Route::resource('/admin/labor', 'Admin\LaborController', ['as'=>'admin']);
 //
 Route::get('/admin/timelines/gantt', function () {

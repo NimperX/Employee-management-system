@@ -111,39 +111,46 @@ class MachinesController extends Controller
          return redirect()->route('admin.machines.index');
     }
 
-    public function allocationEdit(Machine $machine)
+    public function allocationEdit($id)
     {
-         //to edit data
-        //the value from db is stored inside this object and passed through the url to the view
-        
-        $arr['machine_types'] = MachineType::all();
-
-        $arr['machines'] = Machine::all();
-
         $arr['projects'] = Project::all();
+
+        $arr['machine'] = Machine::find($id);
         
         return view('admin.machines.allocationview')->with($arr);    
     }
 
-    public function allocationUpdate(Request $request, $machine_id)
+    public function allocationUpdate(Request $request, $id)
     {
          //the entire entry in the db is represented
-         $machine = Machine::find($machine_id);
-         $machine->machine_id = $request->machine_id;
-         $machine->machine_type = $request->machine_type;
-         $machine->machine_name= $request->machine_name;
-         $machine->machine_availability  = $request->machine_availability;
-         $machine->project_id = $request->project_id;
-         $machine->project_name = $request->project_name;
-         $machine->work_start_date = $request->work_start_date;
-         $machine->work_end_date= $request->work_end_date;
+        $machine = Machine::find($id);
+        $project = Project::find($request->project_id);
+        $machine->machine_availability = 0;
+        $machine->project()->associate($project);
 
-         $machine->save();
+        $machine->save();
         return redirect()->route('admin.machines.allocationindex');
 
     }
 
+    public function unallocate(Request $request, $id)
+    {
+         //the entire entry in the db is represented
+        $machine = Machine::find($id);
+        
+        $machine->machine_availability = 1;
+        $machine->project()->dissociate();
 
+        $machine->save();
+        return redirect()->route('admin.machines.allocationindex');
+
+    }
+
+    public function allocationindex()
+    {
+        $arr['machines'] = Machine::has('project')->get();
+        return view('admin.machines.allocationindex')->with($arr);
+    }
 
     /**
      * Remove the specified resource from storage.
