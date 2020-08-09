@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
+use App\Labor;
+use App\Machine;
+use App\Project;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,8 +27,14 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $arr['projects'] = Project::all();
+        $arr['employees'] = Employee::all();
+        $arr['labors'] = Labor::all();
+        $arr['machines'] = Machine::all();
+        $arr['suppliers'] = Supplier::all();
+
+        return view('home')->with($arr);
     }
 
     public function dashboard()

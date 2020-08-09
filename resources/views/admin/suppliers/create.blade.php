@@ -87,7 +87,6 @@
             onblur="(this.type='text')" name="estimated_end_date" required>
         </div>
       </div>
-s
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="projectnamelbl">Additional remarks:</label>
