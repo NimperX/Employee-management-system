@@ -72,6 +72,7 @@ Route::resource('/admin/estimates', 'Admin\EstimatesController', ['as'=>'admin']
 Route::resource('/admin/warranties', 'Admin\WarrantiesController', ['as'=>'admin']);
 //route for expenses
 Route::get('/admin/expenses/expenseview', 'Admin\ExpensesController@ExpenseView' , ['as'=>'admin'])->name('admin/expenses/expenseview');
+Route::post('/admin/expenses/expensenew', 'Admin\ExpensesController@ExpenseNew' , ['as'=>'admin'])->name('admin/expenses/expensenew');
 Route::resource('/admin/expenses', 'Admin\ExpensesController', ['as'=>'admin']);
 //
 Route::resource('/admin/customers', 'Admin\CustomersController', ['as'=>'admin']);

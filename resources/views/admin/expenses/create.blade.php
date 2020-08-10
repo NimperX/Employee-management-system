@@ -66,7 +66,7 @@
           <select class="form-control" name="receiver_id">
             <option value="" disabled selected> Choose your option </option>
             @foreach($employees as $e)
-            <option value="{{$e->employee_id}}">{{$e->first_name}} {{$e->last_name}}</option>
+            <option value="{{$e->employee_id}}">{{$e->first_name}} {{$e->last_name}} ({{$e->employee_category_id == 7 ? $e->designation : $e->employeecategory->employee_category}})</option>
             @endforeach
           </select>
         </div>

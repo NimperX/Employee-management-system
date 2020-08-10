@@ -63,7 +63,6 @@
         </div>
       </div>
       <div class="col-md-6 col-lg-6 col-xl-6">
-        <!-- Active projects -->
         <div class="card status">
           <div class="icon-container">
             <div class="icon">
@@ -74,8 +73,9 @@
           <div class="text-right count">{{$employees->count()}}</div>
         </div>
       </div>
-      <div class="col-md-6 col-lg-6 col-xl-6">
-        <!-- Contributed members -->
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-xl-4">
         <div class="card status">
           <div class="icon-container">
             <div class="icon">
@@ -86,8 +86,7 @@
           <div class="text-right count">{{$labors->count()}}</div>
         </div>
       </div>
-      <div class="col-md-6 col-lg-6 col-xl-6">
-        <!-- Contributed members -->
+      <div class="col-md-6 col-lg-6 col-xl-4">
         <div class="card status">
           <div class="icon-container">
             <div class="icon">
@@ -96,6 +95,17 @@
           </div>
           <div class="text-left details"><span class="h5">Supplier</span><br>count</div>
           <div class="text-right count">{{$labors->count()}}</div>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12 col-xl-4">
+        <div class="card status">
+          <div class="icon-container">
+            <div class="icon">
+              <ion-icon name="cog"></ion-icon>
+            </div>
+          </div>
+          <div class="text-left details"><span class="h5">Machine</span><br>count</div>
+          <div class="text-right count">{{$machines->count()}}</div>
         </div>
       </div>
     </div>

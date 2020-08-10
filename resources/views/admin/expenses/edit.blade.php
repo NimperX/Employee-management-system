@@ -65,25 +65,13 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-2" for="projectidlbl">Amount spent:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="amount_spent" id="amount_spent" value="{{$expense->amount_spent}}">
-          </div>
-        </div>
-
-        <input type="button" onclick="getAmount()" value="Amount left">
-
-        <input readonly id="amount_leftover" name="amount_leftover" value="">
-
-
-        <div class="form-group">
           <label class="control-label col-sm-2" for="projectidlbl">Receiver's name:</label>
           <div class="col-sm-10">
             <select class="form-control" name="receiver_id" value="{{$expense->receiver_id}}">
 
               <option value="" disabled selected> Choose your option </option>
               @foreach($employees as $e)
-              <option value="{{$e->employee_id}}" {{$expense->employee->employee_id == $e->employee_id ? 'selected' : ''}}>{{$e->first_name}} {{$e->last_name}}</option>
+              <option value="{{$e->employee_id}}" {{$expense->employee->employee_id == $e->employee_id ? 'selected' : ''}}>{{$e->first_name}} {{$e->last_name}} ({{$e->employee_category_id == 7 ? $e->designation : $e->employeecategory->employee_category}})</option>
               @endforeach
             </select>
           </div>

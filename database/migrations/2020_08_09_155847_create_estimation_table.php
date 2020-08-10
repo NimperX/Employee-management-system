@@ -15,7 +15,15 @@ class CreateEstimationTable extends Migration
     {
         Schema::create('estimation', function (Blueprint $table) {
             $table->id();
-            $table->string('estimate');
+            $table->string('estimate_type');
+            $table->integer('emp_type')->unsigned()->nullable();
+            $table->integer('int_work_days')->nullable();
+            $table->integer('hire_work_days')->nullable();
+            $table->integer('machine_work_days')->nullable();
+            $table->decimal('oh_rate');
+            $table->decimal('nbt_rate');
+            $table->decimal('vat_rate');
+            $table->decimal('profit');
             $table->timestamps();
         });
     }

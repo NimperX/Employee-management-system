@@ -13,4 +13,9 @@ class MachineType extends Model
     {
         return $this->hasMany('App\Machine');
     }
+
+    public function estimate()
+    {
+        return $this->belongsToMany('App\Estimate');
+    }
 }

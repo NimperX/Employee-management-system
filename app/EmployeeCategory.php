@@ -18,4 +18,9 @@ class EmployeeCategory extends Model
     {
         return $this->hasMany('App\Labor', 'labor_nic');
     }
+
+    public function estimate()
+    {
+        return $this->belongsToMany('App\Estimate');
+    }
 }

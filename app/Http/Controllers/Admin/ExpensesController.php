@@ -22,6 +22,7 @@ class ExpensesController extends Controller
     public function index()
     {
         $arr['expenses'] = Expense::all();
+        $arr['projects'] = Project::all();
         return view('admin.expenses.index')->with($arr);
     }
 
@@ -110,7 +111,6 @@ class ExpensesController extends Controller
         $expense->money_given_start_date = $request->time_period_start_date;
         $expense->money_given_end_date = $request->time_period_end_date;
         $expense->amount_given = $request->amount_given;
-        $expense->amount_spent = $request->amount_spent;
         
         $expense->project()->associate($project);
         $expense->employee()->associate($employee);
@@ -131,9 +131,20 @@ class ExpensesController extends Controller
         return view ('admin.expenses.expenseview')->with($arr);
     }
 
+    public function ExpenseNew(Request $request){
+        $expense = new Expense();
+        $project = Project::find($request->project_id);
+        
+        $expense->description = $request->description;
+        $expense->amount_spent = $request->amount;
+        
+        $expense->project()->associate($project);
+
+        $expense->save();
+        return redirect()->route('admin.expenses.index');
+    }
+
    
-
-
     /**
      * Remove the specified resource from storage.
      *
