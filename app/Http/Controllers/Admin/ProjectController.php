@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Project; //name of model
 use App\Type;
 use App\Customer;
+use App\Estimate;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class ProjectController extends Controller
 {
@@ -134,10 +137,7 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.index');
 
     }
-
-   
-
-    
+  
    
     /**
      * Remove the specified resource from storage.

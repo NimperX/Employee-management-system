@@ -50,7 +50,7 @@
 
       @foreach($estimates as $e)
         <tr>
-          <td>{{$e->estimate_id}}</td>
+          <td>{{$e->id}}</td>
           <td>{{$e->int_work_days}}</td>
           <td>{{$e->int_labor_cost}}</td>
           <td>{{$e->hire_work_days}}</td>
@@ -84,7 +84,7 @@
             <form action="{{route('admin.print.report')}}" method="POST">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="type" value="quotation">
-              <input type="hidden" name="estimate_id" value="{{$e->estimate_id}}">
+              <input type="hidden" name="estimate_id" value="{{$e->id}}">
               <input type="submit" class="btn btn-success" value="Print">
             </form>
           </td>
