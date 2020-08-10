@@ -21,6 +21,6 @@ class EmployeeCategory extends Model
 
     public function estimate()
     {
-        return $this->belongsToMany('App\Estimate');
+        return $this->belongsToMany('App\Estimate','employee_estimate','employee_id','estimation_id');
     }
 }

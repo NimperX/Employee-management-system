@@ -131,25 +131,19 @@ to get the desired effect
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>View all</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.estimates.create',['type' => 'estimation', 'mode' => 'labor'])}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Labor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.estimates.create',['type' => 'estimation', 'mode' => 'machine'])}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Machines</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.estimates.create',['type' => 'estimation', 'mode' => 'labormachine'])}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Labor and machines</p>
                 </a>
@@ -170,25 +164,25 @@ to get the desired effect
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+              <a href="{{route('admin.estimates.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View all</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.estimates.create',['type' => 'quotation', 'mode' => 'labor'])}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Labor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.estimates.create',['type' => 'quotation', 'mode' => 'machine'])}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Machines</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{route('admin.estimates.create',['type' => 'quotation', 'mode' => 'labormachine'])}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Labor and machines</p>
                 </a>

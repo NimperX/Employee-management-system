@@ -20,6 +20,9 @@ class CreateEstimationTable extends Migration
             $table->integer('int_work_days')->nullable();
             $table->integer('hire_work_days')->nullable();
             $table->integer('machine_work_days')->nullable();
+            $table->decimal('int_labor_cost');
+            $table->decimal('ext_labor_cost');
+            $table->decimal('machine_cost');
             $table->decimal('oh_rate');
             $table->decimal('nbt_rate');
             $table->decimal('vat_rate');

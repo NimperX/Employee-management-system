@@ -55,8 +55,6 @@
             <option value="" disabled selected> Choose your option </option>
             @foreach($project_types as $t)
             <option value="{{$t->id}}"> {{$t->project_type_name}} </option>
-
-
             @endforeach
           </select>
 
@@ -67,11 +65,9 @@
         <label class="control-label col-sm-2" for="projecttypetxt"> Employee category: </label>
         <div class="col-sm-10">
           <select class="form-control" name="employee_category" required>
-
             <option value="" disabled selected> Choose your option </option>
             @foreach($employee_category as $e)
             <option value="{{$e->id}}"> {{$e->employee_category}} </option>
-
             @endforeach
           </select>
         </div>

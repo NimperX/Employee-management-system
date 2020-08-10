@@ -88,6 +88,8 @@ Route::get('/admin/timelines/gantt', function () {
     return view('/admin/timelines/gantt');
 });
 
+Route::post('/admin/printreport', 'Admin\ProjectController@printReport' , ['as'=>'admin'])->name('admin.print.report');
+
 
 
 

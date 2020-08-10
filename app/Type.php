@@ -23,4 +23,9 @@ class Type extends Model
     {
         return $this->hasMany('App\Labor', 'labor_id');
     }
+
+    public function estimate()
+    {
+        return $this->hasMany('App\Estimate','id');
+    }
 }
