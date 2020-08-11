@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Add Estimates</h1>
+        <h1 class="m-0 text-dark">{{$quotation == true ? 'Add Quotation' : 'Calculate Estimation'}}</h1>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -271,6 +271,7 @@
       </div>
   </div>
 </div>
+@if($labor && $machine)
 <script>
   function calc(){
     var int_labor_cost = 0;
@@ -304,4 +305,56 @@
     document.getElementById('cost_charged_from_customer').value = cost_charged_from_customer.toFixed(2);
   }
 </script>
+@elseif(!$labor && $machine)
+<script>
+  function calc(){
+    var machine_cost = 0;
+    for(var i=0;i<4;i++){
+      machine_cost += (document.getElementById('machine_count_'+(i+1)).value * document.getElementById('machine_charge_'+(i+1)).value);
+    }
+
+    var total_cost_of_machines = document.getElementById('machine_work_days').value * machine_cost;
+    var variable_cost = total_cost_of_machines;
+    var variable_overhead_cost = variable_cost * ((document.getElementById('overhead_rate').value/100)+1);
+    var variable_cost_plus_nbt = variable_overhead_cost * ((document.getElementById('nbt_rate').value/100)+1);
+    var total_cost = variable_cost_plus_nbt * ((document.getElementById('vat_rate').value/100)+1);
+    var cost_charged_from_customer = total_cost * ((document.getElementById('profit').value/100)+1);
+
+    document.getElementById('machine_cost').value = machine_cost.toFixed(2);
+    document.getElementById('total_cost_of_machines').value = total_cost_of_machines.toFixed(2);
+    document.getElementById('variable_cost').value = variable_cost.toFixed(2);
+    document.getElementById('variable_overhead_cost').value = variable_overhead_cost.toFixed(2);
+    document.getElementById('variable_cost_plus_nbt').value = variable_cost_plus_nbt.toFixed(2);
+    document.getElementById('total_cost').value = total_cost.toFixed(2);
+    document.getElementById('cost_charged_from_customer').value = cost_charged_from_customer.toFixed(2);
+  }
+</script>
+@elseif($labor && !$machine)
+<script>
+  function calc(){
+    var int_labor_cost = 0;
+    var ext_labor_cost = 0;
+    for(var i=0;i<7;i++){
+      int_labor_cost += (document.getElementById('int_count_'+(i+1)).value * document.getElementById('int_charge_'+(i+1)).value);
+      ext_labor_cost += (document.getElementById('ext_count_'+(i+1)).value * document.getElementById('ext_charge_'+(i+1)).value);
+    }
+
+    var total_cost_of_labors = document.getElementById('int_work_days').value * int_labor_cost + document.getElementById('ext_work_days').value * ext_labor_cost;
+    var variable_cost = total_cost_of_labors;
+    var variable_overhead_cost = variable_cost * ((document.getElementById('overhead_rate').value/100)+1);
+    var variable_cost_plus_nbt = variable_overhead_cost * ((document.getElementById('nbt_rate').value/100)+1);
+    var total_cost = variable_cost_plus_nbt * ((document.getElementById('vat_rate').value/100)+1);
+    var cost_charged_from_customer = total_cost * ((document.getElementById('profit').value/100)+1);
+
+    document.getElementById('int_labor_cost').value = int_labor_cost.toFixed(2);
+    document.getElementById('ext_labor_cost').value = ext_labor_cost.toFixed(2);
+    document.getElementById('total_cost_of_labors').value = total_cost_of_labors.toFixed(2);
+    document.getElementById('variable_cost').value = variable_cost.toFixed(2);
+    document.getElementById('variable_overhead_cost').value = variable_overhead_cost.toFixed(2);
+    document.getElementById('variable_cost_plus_nbt').value = variable_cost_plus_nbt.toFixed(2);
+    document.getElementById('total_cost').value = total_cost.toFixed(2);
+    document.getElementById('cost_charged_from_customer').value = cost_charged_from_customer.toFixed(2);
+  }
+</script>
+@endif
 @endsection
