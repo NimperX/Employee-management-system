@@ -88,8 +88,14 @@ Route::get('/admin/timelines/gantt', function () {
     return view('/admin/timelines/gantt');
 });
 
-Route::post('/admin/printreport', 'Admin\EstimatesController@printReport' , ['as'=>'admin'])->name('admin.print.report');
-
+Route::post('/admin/print/quotation', 'Admin\ReportController@printQuotation' , ['as'=>'admin'])->name('admin.print.quotation');
+Route::post('/admin/print/expenses', 'Admin\ReportController@printExpenses' , ['as'=>'admin'])->name('admin.print.expenses');
+Route::post('/admin/print/warranty', 'Admin\ReportController@printWarranty' , ['as'=>'admin'])->name('admin.print.warranty');
+Route::post('/admin/print/suppliers', 'Admin\ReportController@printSuppliers' , ['as'=>'admin'])->name('admin.print.suppliers');
+Route::post('/admin/print/customers', 'Admin\ReportController@printCustomers' , ['as'=>'admin'])->name('admin.print.customers');
+Route::post('/admin/print/labors', 'Admin\ReportController@printLabors' , ['as'=>'admin'])->name('admin.print.labors');
+Route::post('/admin/print/emp&mach/project', 'Admin\ReportController@printEmpMachAllocation' , ['as'=>'admin'])->name('admin.print.empmachproject');
+Route::post('/admin/print/labor/project', 'Admin\ReportController@printLaborAllocation' , ['as'=>'admin'])->name('admin.print.laborproject');
 
 
 

@@ -26,6 +26,10 @@
     <p>
       <a href="{{url('/admin/labor/allocationindex')}}" class="btn btn-success"> View allocation </a>
     </p>
+    <form action="{{route('admin.print.labors')}}" method="POST">
+      <input type="hidden" name="_token" value="{{csrf_token()}}">
+      <input type="submit" class="btn btn-warning mb-2" value="View Report">
+    </form>
     <div style="overflow-x:auto;">
       <table class="table table-bordered table-striped" id="labor_table">
         <thead>

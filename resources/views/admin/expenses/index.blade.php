@@ -103,7 +103,7 @@
                 $j++;
               @endphp
             @endforeach
-            {{number_format($total_given - $total_spent,2,'.','')}}
+            {{number_format(($total_given - $total_spent > 0 ? $total_given - $total_spent : 0),2,'.','')}}
           </td>
           <td>
             @if($e->given_employee_id != '')

@@ -52,7 +52,13 @@
           <td>{{$w->warranty_start_date == '' ? '-' : $w->warranty_start_date}}</td>
           <td>{{$w->warranty_end_date == '' ? '-' : $w->warranty_end_date}}</td>
           <td>{{$w->machine_hours == '' ? '-' : $w->machine_hours}}</td>
-          <td> <a href="{{route('admin.warranties.edit', $w->warranty_id)}}" class="btn btn-info"> Edit </a>
+          <td> <a href="{{route('admin.warranties.edit', $w->warranty_id)}}" class="btn btn-info mb-2"> Edit </a><br>
+            <form action="{{route('admin.print.warranty')}}" method="POST">
+              <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="warranty_id" value="{{$w->warranty_id}}">
+              <input type="submit" class="btn btn-success  mb-2" value="View Warranty">
+            </form>
+          </td></tr>
             @endforeach
     </table>
   </div>

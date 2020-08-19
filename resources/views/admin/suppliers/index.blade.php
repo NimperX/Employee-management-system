@@ -22,6 +22,11 @@
       <div class="container-fluid">
           <p>
               <a href="{{route('admin.suppliers.create')}}" class="btn btn-primary"> Add new supplier </a>
+              <form action="{{route('admin.print.suppliers')}}" method="POST">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <input type="hidden" name="supplier_id" value="all">
+                <input type="submit" class="btn btn-success  mb-2" value="Print Report">
+              </form>
 </p>
 
            <table class="table table-bordered table-striped" id="suppliers_table">
@@ -52,7 +57,14 @@
                                                         <td>{{$s->hired_date}}</td>
                                                         <td>{{$s->estimated_end_date}}</td>
                                                         <td>{{$s->additional_remarks}}</td>
-                                                        <td> <a href="{{route('admin.suppliers.edit', $s->supplier_id)}}" class="btn btn-info"> Edit </a>  
+                                                        <td> <a href="{{route('admin.suppliers.edit', $s->supplier_id)}}" class="btn btn-info mb-2"> Edit </a><br>
+                                                          <form action="{{route('admin.print.suppliers')}}" method="POST">
+                                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                                            <input type="hidden" name="supplier_id" value="{{$s->supplier_id}}">
+                                                            <input type="submit" class="btn btn-success  mb-2" value="View">
+                                                          </form>
+                                                        </td>
+                                                    </tr> 
                                                     @endforeach
 </table>
 </div>

@@ -22,7 +22,16 @@
   <div class="container-fluid">
     <p>
       <a href="{{route('admin.projects.create')}}" class="btn btn-primary"> Add new project </a>
-      <a href="" class="btn btn-secondary"> Create report </a>
+      <form action="{{route('admin.print.empmachproject')}}" method="POST">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="project_id" value="all">
+        <input type="submit" class="btn btn-secondary mb-2" value="View Employee & Machine allocation">
+      </form>
+      <form action="{{route('admin.print.laborproject')}}" method="POST">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="project_id" value="all">
+        <input type="submit" class="btn btn-secondary mb-2" value="View Labor allocation">
+      </form>
     </p>
 
     <table class="table table-bordered table-striped" id="projects_table">
@@ -57,9 +66,24 @@
           <td>{{$p->estimated_project_end_date}}</td>
           <td>
             <div class="btn-group" role="group">
-              <a href="{{route('admin.projects.edit', $p->project_id)}}" class="btn btn-info"> Edit </a>
-              <a href="" class="btn btn-success"> View </a>
+              <a href="{{route('admin.projects.edit', $p->project_id)}}" class="btn btn-info mb-2"> Edit </a><br>
+              <a href="" class="btn btn-success mb-2"> View </a><br>
             </div>
+            <form action="{{route('admin.print.expenses')}}" method="POST">
+              <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="project_id" value="{{$p->project_id}}">
+              <input type="submit" class="btn btn-warning mb-2" value="View Expenses">
+            </form>  
+            <form action="{{route('admin.print.empmachproject')}}" method="POST">
+              <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="project_id" value="{{$p->project_id}}">
+              <input type="submit" class="btn btn-secondary mb-2" value="View Employee & Machine allocation">
+            </form>
+            <form action="{{route('admin.print.laborproject')}}" method="POST">
+              <input type="hidden" name="_token" value="{{csrf_token()}}">
+              <input type="hidden" name="project_id" value="{{$p->project_id}}">
+              <input type="submit" class="btn btn-secondary mb-2" value="View Labor allocation">
+            </form>
           </td>
           @endforeach
 

@@ -11,6 +11,6 @@ class Supplier extends Model
 
     public function labor()
     {
-        return $this->hasMany('App\Labor', 'labor_id');
+        return $this->hasMany('App\Labor', 'supplier_id', 'supplier_id');
     }
 }
