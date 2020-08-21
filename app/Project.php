@@ -41,7 +41,7 @@ class Project extends Model
 
     public function expense()
     {
-        return $this->hasMany('App\Expense', 'expense_id');
+        return $this->hasMany('App\Expense', 'project_id', 'project_id');
     } 
     
     public function machines()

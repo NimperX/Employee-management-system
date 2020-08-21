@@ -81,7 +81,7 @@
             @endphp
           </td>
           <td>
-            <form action="{{route('admin.print.report')}}" method="POST">
+            <form action="{{route('admin.print.quotation')}}" method="POST">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="hidden" name="type" value="quotation">
               <input type="hidden" name="estimate_id" value="{{$e->id}}">

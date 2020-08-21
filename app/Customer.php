@@ -10,7 +10,7 @@ class Customer extends Model
 
     public function projects()
     {
-        return $this->hasMany('App\Project', 'project_id');
+        return $this->hasMany('App\Project', 'customer_id', 'customer_id');
     }
 
     public function warranties()

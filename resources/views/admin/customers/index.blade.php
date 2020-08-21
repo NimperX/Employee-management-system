@@ -22,7 +22,12 @@
       <div class="container-fluid">
           <p>
               <a href="{{route('admin.customers.create')}}" class="btn btn-primary"> Add new customer </a>
-</p>
+              <form action="{{route('admin.print.customers')}}" method="POST">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <input type="hidden" name="customer_id" value="all">
+                <input type="submit" class="btn btn-success  mb-2" value="Print Report">
+              </form>
+          </p>
 
            <table class="table table-bordered table-striped" id="customers_table">
                                                   <thead>
@@ -50,11 +55,16 @@
                                                         <td>{{$c->designation}}</td>
                                                         <td>{{$c->company_address}}</td>
                                                         <td>{{$c->email}}</td>
-                                                        <td> <a href="{{route('admin.customers.edit',$c->customer_id)}}" class="btn btn-info"> Edit </a>
+                                                        <td> <a href="{{route('admin.customers.edit',$c->customer_id)}}" class="btn btn-info mb-2"> Edit </a><br>
                                                           <form action="{{route('admin.customers.destroy',$c->customer_id)}}" method="POST">
                                                             @method('DELETE')
                                                             @csrf
-                                                          <button type="submit" class="btn btn-danger mt-1"> Delete </button>
+                                                          <button type="submit" class="btn btn-danger mb-2"> Delete </button>
+                                                          </form>
+                                                          <form action="{{route('admin.print.customers')}}" method="POST">
+                                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                                            <input type="hidden" name="customer_id" value="{{$c->customer_id}}">
+                                                            <input type="submit" class="btn btn-success  mb-2" value="Print Report">
                                                           </form>
                                                         </td>
                                                     @endforeach
