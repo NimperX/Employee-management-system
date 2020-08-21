@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,8 +88,9 @@ Route::resource('/admin/labor', 'Admin\LaborController', ['as'=>'admin']);
 Route::get('/admin/timelines/gantt', function () {
     return view('/admin/timelines/gantt');
 });
-
+//route to print estimate
 Route::post('/admin/printreport', 'Admin\EstimatesController@printReport' , ['as'=>'admin'])->name('admin.print.report');
+//
 
 
 

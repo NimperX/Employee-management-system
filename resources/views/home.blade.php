@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="text-left details"><span class="h5">Supplier</span><br>count</div>
-          <div class="text-right count">{{$labors->count()}}</div>
+          <div class="text-right count">{{$suppliers->count()}}</div>
         </div>
       </div>
       <div class="col-md-12 col-lg-12 col-xl-4">
@@ -146,6 +146,7 @@
               @endif
             @endforeach
           </table>
+          <!-- only upto five projects are displayed-->
         </div>
       </div>
       <div class="col-md-5">
