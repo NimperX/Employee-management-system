@@ -28,11 +28,33 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $arr['projects'] = Project::all();
+        $projects = Project::all();
+        $arr['projects'] = $projects;
         $arr['employees'] = Employee::all();
         $arr['labors'] = Labor::all();
         $arr['machines'] = Machine::all();
         $arr['suppliers'] = Supplier::all();
+
+        $proj_emp_count='';
+        $proj_emp_label='';
+        $proj_labor_count='';
+        $proj_labor_label='';
+
+        $i=0;
+        foreach($projects as $p){
+            $proj_emp_count .= $p->employees->count().',';
+            $proj_emp_label .= $p->project_name.',';
+            $proj_labor_count .= $p->labors->count().',';
+            $proj_labor_label .= $p->project_name.',';
+            $i++;
+            if($i >= 5) break;
+            dd($p->employees);
+        }
+
+        $arr['proj_emp_count'] = $proj_emp_count;
+        $arr['proj_emp_label'] = $proj_emp_label;
+        $arr['proj_labor_count'] = $proj_labor_count;
+        $arr['proj_labor_label'] = $proj_labor_label;
 
         return view('home')->with($arr);
     }

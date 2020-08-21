@@ -299,12 +299,12 @@
     type: 'pie',
     data: {
         labels: [
-          @php
+          @php    
             $i=0;
           @endphp
           @foreach($projects as $p)
             @php
-              $i=0;
+              $i++;
               echo chr(39).$p->project_name.chr(39).',';
             @endphp
             @if($i>=5)
@@ -313,21 +313,8 @@
           @endforeach
           ],
         datasets: [{
-            label: '# of Votes',
-            data: [
-              @php
-                $i=0;
-              @endphp
-              @foreach($projects as $p)
-                @php
-                  $i=0;
-                  echo $p->employees->count().',';
-                @endphp
-                @if($i>=5)
-                  @break
-                @endif
-              @endforeach
-              ],
+            label: '# of Employee count',
+            data: [{{$proj_emp_count}}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',
