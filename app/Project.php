@@ -26,12 +26,12 @@ class Project extends Model
     
     public function employees()
     {
-        return $this->hasMany('App\Employee', 'employee_id');
+        return $this->hasMany('App\Employee', 'project_id');
     }
 
     public function labors()
     {
-        return $this->hasMany('App\Labor', 'labor_id');
+        return $this->hasMany('App\Labor', 'project_id');
     }
 
     public function warranty()

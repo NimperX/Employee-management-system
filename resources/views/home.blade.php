@@ -298,23 +298,10 @@
   var myPieChart1 = new Chart(ctx1, {
     type: 'pie',
     data: {
-        labels: [
-          @php    
-            $i=0;
-          @endphp
-          @foreach($projects as $p)
-            @php
-              $i++;
-              echo chr(39).$p->project_name.chr(39).',';
-            @endphp
-            @if($i>=5)
-              @break
-            @endif
-          @endforeach
-          ],
+        labels: [{!! $proj_emp_label !!}],
         datasets: [{
             label: '# of Employee count',
-            data: [{{$proj_emp_count}}],
+            data: [{{ $proj_emp_count }}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',
@@ -347,36 +334,10 @@
   var myPieChart2 = new Chart(ctx2, {
     type: 'pie',
     data: {
-        labels: [
-          @php
-            $i=0;
-          @endphp
-          @foreach($projects as $p)
-            @php
-              $i=0;
-              echo chr(39).$p->project_name.chr(39).',';
-            @endphp
-            @if($i>=5)
-              @break
-            @endif
-          @endforeach
-          ],
+        labels: [{!! $proj_labor_label !!}],
         datasets: [{
             label: '# of Votes',
-            data: [
-              @php
-                $i=0;
-              @endphp
-              @foreach($projects as $p)
-                @php
-                  $i=0;
-                  echo $p->labors->count().',';
-                @endphp
-                @if($i>=5)
-                  @break
-                @endif
-              @endforeach
-              ],
+            data: [{{ $proj_labor_count }}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',

@@ -43,12 +43,11 @@ class HomeController extends Controller
         $i=0;
         foreach($projects as $p){
             $proj_emp_count .= $p->employees->count().',';
-            $proj_emp_label .= $p->project_name.',';
+            $proj_emp_label .= '\''.$p->project_name.'\',';
             $proj_labor_count .= $p->labors->count().',';
-            $proj_labor_label .= $p->project_name.',';
+            $proj_labor_label .= '\''.$p->project_name.'\',';
             $i++;
             if($i >= 5) break;
-            dd($p->employees);
         }
 
         $arr['proj_emp_count'] = $proj_emp_count;
